@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/modules/user/user.form.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({super.key});
@@ -11,7 +12,7 @@ class UserPage extends StatelessWidget {
         ),
         body: const SafeArea(
           minimum: EdgeInsets.all(16),
-          child: Text('UserPage'),
+          child: UserForm(),
         ));
   }
 }
