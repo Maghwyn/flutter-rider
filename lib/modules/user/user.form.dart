@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_project/models/text_field.custom.dart';
-import 'package:flutter_project/modules/auth/signup/signup.state.dart';
 import 'package:flutter_project/modules/user/user.state.dart';
 import 'package:get/get.dart';
 

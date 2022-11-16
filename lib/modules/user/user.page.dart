@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/modules/user/user_edit.page.dart';
-import 'package:flutter_project/modules/user/user.form.dart';
 import 'package:flutter_project/modules/user/user.profile.dart';
 import 'package:flutter_project/modules/user/user_edit_horses.page.dart';
-import 'package:flutter_project/modules/user/users_horses.form.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:get/route_manager.dart';
 
 import '../../layout/app/app.layout.controller.dart';
-import '../placeholder/page.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({super.key});
@@ -27,11 +23,30 @@ class UserPage extends StatelessWidget {
               // Important: Remove any padding from the ListView.
               padding: EdgeInsets.zero,
               children: [
-                const DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Colors.purple,
+                const UserAccountsDrawerHeader(
+                  accountName: Text(
+                    "Name",
+                    style: TextStyle(
+                      color: Colors.purple,
+                    ),
                   ),
-                  child: Text('Profile'),
+                  accountEmail: Text(
+                    "06 12 12 12 12",
+                    style: TextStyle(
+                      color: Colors.purple,
+                    ),
+                  ),
+                  currentAccountPicture: CircleAvatar(
+                    backgroundColor: Colors.purple,
+                  ),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        "https://appmaking.co/wp-content/uploads/2021/08/android-drawer-bg.jpeg",
+                      ),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
                 ListTile(
                   leading: const Icon(
