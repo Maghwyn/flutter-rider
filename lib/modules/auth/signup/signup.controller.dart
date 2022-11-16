@@ -10,11 +10,11 @@ class SignupController  extends GetxController {
 
   SignupState get state => _signupStateStream.value;
 
-  void signup(String email, String password) async {
+  void signup(String name, String email, String password) async {
     _signupStateStream.value = SignupLoading();
 
     try{
-      await _authenticationController.signIn(email, password);
+      await _authenticationController.signUp(name, email, password);
       _signupStateStream.value = SignupState();
     } on AuthenticationException catch(e){
       _signupStateStream.value = SignupFailure(error: e.message);
