@@ -27,7 +27,7 @@ Future main() async {
 
 void initializer() {
   // inject authentication controller
-  Get.lazyPut(() => AuthenticationController(Get.put(FakeAuthenticationService())));
+  Get.lazyPut(() => AuthenticationController(Get.put(AuthenticationService())));
 }
 
 class ProjectApp extends GetWidget<AuthenticationController> {
