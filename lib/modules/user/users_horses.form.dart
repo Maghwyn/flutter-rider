@@ -17,10 +17,12 @@ class _UserHorsesFormState extends State<UserHorsesForm> {
   final _controller = Get.put(SignupController());
 
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _numberController = TextEditingController();
-  final _ageController = TextEditingController();
   final _pictureController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _ageController = TextEditingController();
+  final _robeController = TextEditingController();
+  final _raceController = TextEditingController();
+  final _sexeController = TextEditingController();
   final bool _autoValidate = false;
 
   @override
@@ -40,26 +42,36 @@ class _UserHorsesFormState extends State<UserHorsesForm> {
                     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'),
               ),
               _textFormField(CustomTextField(
+                  labelText: "Picture link",
+                  hintText:
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqqxEGfipGn_10dPwgJLe_LRCOWYgIKNEA3A&usqp=CAU",
+                  controller: _pictureController,
+                  validatorType: "image")),
+              _textFormField(CustomTextField(
                   labelText: "Name",
                   hintText: "Jeane Dark",
                   controller: _nameController,
                   validatorType: "name")),
-              _textFormField(CustomTextField(
-                  labelText: "Phone Number",
-                  hintText: "06 12 12 12 12",
-                  controller: _numberController,
-                  validatorType: "phone")),
               _textFormField(CustomTextField(
                   labelText: "Age",
                   hintText: "19",
                   controller: _ageController,
                   validatorType: "age")),
               _textFormField(CustomTextField(
-                  labelText: "Picture link",
-                  hintText:
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqqxEGfipGn_10dPwgJLe_LRCOWYgIKNEA3A&usqp=CAU",
-                  controller: _pictureController,
-                  validatorType: "age")),
+                  labelText: "Robe",
+                  hintText: "robe",
+                  controller: _robeController,
+                  validatorType: "robe")),
+              _textFormField(CustomTextField(
+                  labelText: "Race",
+                  hintText: "race",
+                  controller: _raceController,
+                  validatorType: "race")),
+              _textFormField(CustomTextField(
+                  labelText: "Sexe",
+                  hintText: "sexe",
+                  controller: _sexeController,
+                  validatorType: "sexe")),
               ElevatedButton(
                 onPressed: () {},
                 child: const Text('Edit'),

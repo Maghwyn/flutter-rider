@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/modules/user/user_edit.page.dart';
 import 'package:flutter_project/modules/user/user.form.dart';
 import 'package:flutter_project/modules/user/user.profile.dart';
-import 'package:flutter_project/modules/user/user_edit_horses.dart';
+import 'package:flutter_project/modules/user/user_edit_horses.page.dart';
 import 'package:flutter_project/modules/user/users_horses.form.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/route_manager.dart';
