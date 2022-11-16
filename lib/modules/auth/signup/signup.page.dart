@@ -102,7 +102,7 @@ class __SignUpFormState extends State<_SignUpForm> {
 
   _onsignupButtonPressed() {
     if (_key.currentState!.validate()) {
-      _controller.signup(_emailController.text, _passwordController.text);
+      _controller.signup(_nameController.text, _emailController.text, _passwordController.text);
     } else {
       setState(() {
         _autoValidate = true;
