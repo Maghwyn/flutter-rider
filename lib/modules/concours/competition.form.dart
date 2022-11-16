@@ -23,7 +23,7 @@ class _ConcoursForm extends StatefulWidget {
 }
 
 class __ConcoursFormState extends State<_ConcoursForm> {
-  final _controller = Get.put(ConcoursController());
+  final _controller = Get.put(CompetitionController());
 
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   final _nameController = TextEditingController();

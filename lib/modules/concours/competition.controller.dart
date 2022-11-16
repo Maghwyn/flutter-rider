@@ -1,18 +1,21 @@
 import 'package:flutter_project/modules/concours/competition.state.dart';
+import 'package:flutter_project/modules/concours/competition.service.dart';
 import 'package:get/get.dart';
 
-class ConcoursController  extends GetxController {
-  final _concoursStateStream = ConcoursState().obs;
+class CompetitionController  extends GetxController {
+  final CompetitionServiceTemplate _competitionService = Get.find();
+  final _competitionStateStream = ConcoursState().obs;
 
-  ConcoursState get state => _concoursStateStream.value;
+  ConcoursState get state => _competitionStateStream.value;
 
   void concours(String name, String date_hours, String adress, String picture) async {
-    _concoursStateStream.value = ConcoursLoading();
+    final competition = await _competitionService.CreateCompetition(name, date_hours, adress, picture);
+    _competitionStateStream.value = ConcoursLoading();
 
     try{
-      _concoursStateStream.value = ConcoursState();
+      _competitionStateStream.value = ConcoursState();
     } on Exception{
-      _concoursStateStream.value = ConcoursFailure(error: 'Unknown error occurred.');
+      _competitionStateStream.value = ConcoursFailure(error: 'Unknown error occurred.');
     }
   }
 }
