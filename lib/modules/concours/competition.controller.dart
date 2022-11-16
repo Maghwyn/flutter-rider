@@ -1,4 +1,4 @@
-import 'package:flutter_project/modules/concours/concours.state.dart';
+import 'package:flutter_project/modules/concours/competition.state.dart';
 import 'package:get/get.dart';
 
 class ConcoursController  extends GetxController {
@@ -6,7 +6,7 @@ class ConcoursController  extends GetxController {
 
   ConcoursState get state => _concoursStateStream.value;
 
-  void concours(String training, String date_hours, String duration, String speciality) async {
+  void concours(String name, String date_hours, String adress, String picture) async {
     _concoursStateStream.value = ConcoursLoading();
 
     try{

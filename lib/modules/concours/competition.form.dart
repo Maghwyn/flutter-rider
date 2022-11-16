@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/config/constants.dart';
 import 'package:flutter_project/models/text_field.custom.dart';
-import 'package:flutter_project/modules/concours/concours.controller.dart';
-import 'package:flutter_project/modules/concours/concours.state.dart';
+import 'package:flutter_project/modules/concours/competition.controller.dart';
+import 'package:flutter_project/modules/concours/competition.state.dart';
 import 'package:get/get.dart';
 
 class ConcoursPage extends StatelessWidget {
@@ -48,7 +48,7 @@ class __ConcoursFormState extends State<_ConcoursForm> {
                   labelText: "Name of the competition",
                   hintText: "",
                   controller: _nameController,
-                  validatorType: "training"
+                  validatorType: "name"
               )),
               _textFormField(CustomTextField(
                   labelText: "Date and hours",
@@ -60,13 +60,13 @@ class __ConcoursFormState extends State<_ConcoursForm> {
                   labelText: "Adress",
                   hintText: "example : city,number street name",
                   controller: _adressController,
-                  validatorType: "duration"
+                  validatorType: "adress"
               )),
               _textFormField(CustomTextField(
                   labelText: "Picture",
-                  hintText: "",
+                  hintText: "url",
                   controller: _pictureController,
-                  validatorType: "speciality"
+                  validatorType: "picture"
               )),
               ElevatedButton(
                 onPressed: _controller.state is ConcoursLoading
@@ -106,8 +106,8 @@ class __ConcoursFormState extends State<_ConcoursForm> {
 
   _onCoursButtonPressed() {
     if (_key.currentState!.validate()) {
-      _controller.concours(_trainingController.text, _dateController.text,
-          _durationController.text, _specialityController.text);
+      _controller.concours(_nameController.text, _dateController.text,
+          _adressController.text, _pictureController.text);
     } else {
       setState(() {
         _autoValidate = true;
