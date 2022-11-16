@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/layout/app/app.layout.controller.dart';
 import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/modules/placeholder/page.dart';
+import 'package:flutter_project/modules/user/user.profile.dart';
 import 'package:get/get.dart';
 
 import '../../modules/user/user.page.dart';

@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_project/models/text_field.custom.dart';
-import 'package:flutter_project/modules/auth/signup/signup.state.dart';
 import 'package:flutter_project/modules/user/user.state.dart';
 import 'package:get/get.dart';
 
 import '../auth/signup/signup.controller.dart';
 
-class UserForm extends StatefulWidget {
-  const UserForm({super.key});
+class UserProfile extends StatefulWidget {
+  const UserProfile({super.key});
 
   @override
-  State<UserForm> createState() => _UserFormState();
+  State<UserProfile> createState() => _UserProfileState();
 }
 
-class _UserFormState extends State<UserForm> {
+class _UserProfileState extends State<UserProfile> {
   final _controller = Get.put(SignupController());
 
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
@@ -23,8 +22,6 @@ class _UserFormState extends State<UserForm> {
   final _ageController = TextEditingController();
   final _pictureController = TextEditingController();
   final bool _autoValidate = false;
-
-  bool _lights = true;
 
   @override
   Widget build(BuildContext context) {
@@ -63,19 +60,6 @@ class _UserFormState extends State<UserForm> {
                       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqqxEGfipGn_10dPwgJLe_LRCOWYgIKNEA3A&usqp=CAU",
                   controller: _pictureController,
                   validatorType: "age")),
-              SwitchListTile(
-                title: const Text('Demi-Pensionnaire'),
-                value: _lights,
-                onChanged: (bool value) {
-                  setState(() {
-                    _lights = value;
-                  });
-                },
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Edit'),
-              ),
               if (_controller.state is UserFailure)
                 Text(
                   (_controller.state as UserFailure).error,
