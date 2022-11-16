@@ -6,11 +6,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_project/config/mongo.dart';
 import 'package:flutter_project/config/service_locator.dart';
 import 'package:flutter_project/layout/app/app.layout.dart';
-import 'package:flutter_project/layout/auth/auth.layout.dart';
+import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/modules/auth/auth.controller.dart';
 import 'package:flutter_project/modules/auth/auth.service.dart';
-import 'package:flutter_project/modules/auth/auth.state.dart';
-import 'package:flutter_project/modules/loader/page.dart';
 import 'package:flutter_project/router/auth.router.dart';
 import 'package:get/get.dart';
 
@@ -27,7 +25,8 @@ Future main() async {
 
 void initializer() {
   // inject authentication controller
-  Get.lazyPut(() => AuthenticationController(Get.put(FakeAuthenticationService())));
+  Get.lazyPut(
+      () => AuthenticationController(Get.put(FakeAuthenticationService())));
 }
 
 class ProjectApp extends GetWidget<AuthenticationController> {
@@ -36,14 +35,17 @@ class ProjectApp extends GetWidget<AuthenticationController> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      getPages: authRoutes(),
-      title: 'Flutter Obx Auth',
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: Obx(() {
+        getPages: authRoutes(),
+        title: 'Flutter Obx Auth',
+        theme: ThemeData(
+          primarySwatch: Colors.purple,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: AppLayout(
+          user: User(name: "efzef", email: "example@gmail.com"),
+        ) // Dev sans login
+        /*Obx(() {/*Obx(() {
         if (controller.state is UnAuthenticated) {
           return const AuthLayout();
         }
@@ -53,9 +55,9 @@ class ProjectApp extends GetWidget<AuthenticationController> {
             user: (controller.state as Authenticated).user,
           );
         }
-        return const SplashScreen();
-      }),
-    );
+        return const SplashScreen();*/
+      }),*/
+        );
   }
 }
 
