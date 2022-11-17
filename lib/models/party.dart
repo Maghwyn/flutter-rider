@@ -8,6 +8,7 @@ class Party {
   final DateTime? createdAt;
   final String type;
   final DateTime date;
+  final String status;
 
   Party({
     this.id,
@@ -16,6 +17,7 @@ class Party {
     required this.title,
     required this.type,
     required this.date,
+    required this.status,
     this.createdAt,
   });
 }

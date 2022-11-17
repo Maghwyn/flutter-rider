@@ -43,6 +43,7 @@ class PartiesController  extends GetxController {
   );
 
   ObjectId get partyId => _partyStateStream.value.party.id!;
+  Party get party => _partyStateStream.value.party;
 
   List<Widget> get participantsComments => 
     _partyParticipantsStateStream.value.partyParticipants.map((participant) => 
@@ -84,6 +85,7 @@ class PartiesController  extends GetxController {
       date: party.date,
       type: party.type,
       createdAt: party.createdAt,
+      status: party.status,
     ));
   }
 

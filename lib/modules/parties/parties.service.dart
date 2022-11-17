@@ -45,6 +45,7 @@ class PartiesService extends PartiesServiceTemplate {
         date: party["date"],
         createdAt: party["createdAt"],
         type: party["type"],
+        status: party["status"],
       ));
     }
 
@@ -84,6 +85,7 @@ class PartiesService extends PartiesServiceTemplate {
       "date": party.date,
       "createdAt": DateTime.now(),
       "type": party.type,
+      "status": party.status,
     });
 
     final mongoParty = mongoDocument.document;
@@ -95,6 +97,7 @@ class PartiesService extends PartiesServiceTemplate {
       date: mongoParty["date"] as DateTime,
       createdAt: mongoParty["createdAt"] as DateTime,
       type: mongoParty["type"] as String,
+      status: mongoParty["status"] as String,
     );
   }
 
