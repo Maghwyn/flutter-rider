@@ -1,5 +1,6 @@
 import 'package:flutter_project/modules/auth/auth.service.dart';
 import 'package:flutter_project/modules/auth/auth.state.dart';
+import 'package:flutter_project/config/service_locator.dart';
 import 'package:get/get.dart';
 
 class AuthenticationController extends GetxController {
