@@ -5,7 +5,7 @@ class User {
   final String name;
   final String email;
   final DateTime createdAt;
-  final List<String> role;
+  final List<dynamic> role;
   final String picture;
   final int? number;
   final int? age;
