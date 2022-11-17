@@ -21,3 +21,8 @@ List<DropdownMenuItem<String>> courseSpecialityItems = [
   const DropdownMenuItem(value: "Show Jumping", child: Text("Show Jumping")),
   const DropdownMenuItem(value: "Stamina", child: Text("Stamina")),
 ];
+
+List<DropdownMenuItem<String>> partyTypeItems = [
+  const DropdownMenuItem(value: "1", child: Text("Pre-Dinner")),
+  const DropdownMenuItem(value: "2", child: Text("Dinner")),
+];
