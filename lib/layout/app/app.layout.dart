@@ -37,7 +37,7 @@ class AppLayout extends StatelessWidget {
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.auto_graph_outlined),
-                label: 'Flux',
+                label: 'Feed',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.sports_score_sharp),
