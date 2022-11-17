@@ -3,21 +3,7 @@ import 'package:get/get.dart';
 
 appRoutes() => [
   GetPage(
-    name: '/first',
-    page: () => const PlaceholderPage(),
-    middlewares: [MyMiddelware()],
-    transition: Transition.leftToRightWithFade,
-    transitionDuration: const Duration(milliseconds: 500),
-  ),
-  GetPage(
-    name: '/second',
-    page: () => const PlaceholderPage(),
-    middlewares: [MyMiddelware()],
-    transition: Transition.leftToRightWithFade,
-    transitionDuration: const Duration(milliseconds: 500),
-  ),
-  GetPage(
-    name: '/third',
+    name: '/test',
     page: () => const PlaceholderPage(),
     middlewares: [MyMiddelware()],
     transition: Transition.leftToRightWithFade,
