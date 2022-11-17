@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/modules/admin/admin.page.dart';
 import 'package:flutter_project/modules/user/user.controller.dart';
 import 'package:flutter_project/modules/user/user.service.dart';
 import 'package:flutter_project/modules/user/user_edit/user_edit.page.dart';
@@ -78,6 +79,15 @@ class UserPage extends StatelessWidget {
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const UserHorsesEditPage(),
               )),
+            ),
+            if(uc.user.role[0] == "ADMIN") (
+              ListTile(
+                leading: const Icon(
+                  Icons.checklist_rtl_outlined,
+                ),
+                title: const Text('Validate Events'),
+                onTap: () => Get.to(const AdminValidatorPage()),
+              )
             ),
             ListTile(
               leading: const Icon(

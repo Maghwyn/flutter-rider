@@ -189,7 +189,8 @@ class __PartyFormState extends State<_PartyForm> {
         title: _titleController.text,
         type: _typeController,
         partipantsId: [],
-        date: DateTime.parse("${_dateController.text} ${_timeController.text}Z"), 
+        date: DateTime.parse("${_dateController.text} ${_timeController.text}Z"),
+        status: "pending",
       ));
     } else {
       setState(() {
