@@ -9,6 +9,7 @@ class CourseCard extends StatefulWidget {
     required this.duration,
     required this.speciality,
     required this.isMine,
+    required this.status,
   });
 
   final String terrain;
@@ -16,6 +17,7 @@ class CourseCard extends StatefulWidget {
   final String duration;
   final String speciality;
   final bool isMine;
+  final String status;
 
   @override
   State<CourseCard> createState() => _CourseCard();
@@ -26,15 +28,15 @@ class _CourseCard extends State<CourseCard> {
   Widget build(BuildContext context) {
     return Material(
       child: Card(
-        color: Colors.deepPurple[50],
+        color: widget.status != "done" ? Colors.deepPurple[50] : Colors.red[50],
         child: ClipPath(
           clipper: ShapeBorderClipper(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(3))),
           child: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               border: Border(
-                left: BorderSide(color: Color.fromARGB(255, 103, 38, 172), width: 5),
+                left: BorderSide(color: widget.status != "done" ? const Color.fromARGB(255, 103, 38, 172) : Colors.red, width: 5),
               ),
             ),
             child: Wrap(

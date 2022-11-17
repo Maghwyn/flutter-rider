@@ -220,6 +220,7 @@ class __CoursFormState extends State<_CoursForm> {
         date: DateTime.parse("${_dateController.text} ${_timeController.text}Z"),
         duration: _durationController,
         speciality: _specialityController,
+        status: "pending",
       ));
     } else {
       setState(() {

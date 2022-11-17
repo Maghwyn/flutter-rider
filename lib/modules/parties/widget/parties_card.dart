@@ -107,9 +107,9 @@ class _PartyCard extends State<PartyCard> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: widget.isMine ? const Icon(Icons.chat, color: Colors.purple, size: 30) : null,
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10.0),
+                      child: Icon(Icons.chat, color: Colors.purple, size: 30),
                     )
                   ]
                 )
