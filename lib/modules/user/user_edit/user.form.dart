@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/config/service_locator.dart';
 
 import 'package:flutter_project/models/text_field.custom.dart';
+import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/modules/user/user.controller.dart';
-import 'package:flutter_project/modules/user/user.state.dart';
+import 'package:flutter_project/modules/user/user.service.dart';
+import 'package:flutter_project/modules/user/user_edit/user_edit.state.dart';
 import 'package:get/get.dart';
-
-import '../auth/signup/signup.controller.dart';
 
 class UserForm extends StatefulWidget {
   const UserForm({super.key});
@@ -15,7 +16,7 @@ class UserForm extends StatefulWidget {
 }
 
 class _UserFormState extends State<UserForm> {
-  final _controller = Get.put(SignupController());
+  final _editcontroller = Get.put(UserController(Get.put(UserService())));
 
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   final _nameController = TextEditingController();
@@ -23,13 +24,15 @@ class _UserFormState extends State<UserForm> {
   final _phoneController = TextEditingController();
   final _ageController = TextEditingController();
   final _pictureController = TextEditingController();
-  final bool _autoValidate = false;
+  bool _autoValidate = false;
+
+  final User _user = inject<User>();
 
   bool _lights = true;
 
   @override
   Widget build(BuildContext context) {
-    UserController uc = Get.put(UserController());
+    UserController uc = Get.put(UserController(Get.put(UserService())));
     _nameController.text = uc.user.name;
     _emailController.text = uc.user.email;
     _pictureController.text = uc.user.picture;
@@ -72,7 +75,7 @@ class _UserFormState extends State<UserForm> {
                 hintText:
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqqxEGfipGn_10dPwgJLe_LRCOWYgIKNEA3A&usqp=CAU",
                 controller: _pictureController,
-                validatorType: "age")),
+                validatorType: "picture")),
             SwitchListTile(
               title: const Text('Demi-Pensionnaire'),
               value: _lights,
@@ -83,13 +86,44 @@ class _UserFormState extends State<UserForm> {
               },
             ),
             ElevatedButton(
-              onPressed: () {},
+              // onPressed: _editcontroller.stateForm is UserFormLoading
+              //     ? () {}
+              //     : _onEditButtonPressed,
+              onPressed: _onEditButtonPressed,
               child: const Text('Edit'),
             ),
+            // if (_editcontroller.stateForm is UserFormFailure)
+            //   Text(
+            //     (_editcontroller.stateForm as UserFormFailure).error,
+            //     textAlign: TextAlign.center,
+            //     style: TextStyle(color: Get.theme.errorColor),
+            //   ),
+            // if (_editcontroller.stateForm is UserFormLoading)
+            //   const Center(
+            //     child: CircularProgressIndicator(),
+            //   )
           ],
         ),
       ),
     );
+  }
+
+  _onEditButtonPressed() {
+    if (_key.currentState!.validate()) {
+      _editcontroller.updateUser(User(
+        name: _nameController.text,
+        email: _emailController.text,
+        picture: _pictureController.text,
+        role: _user.role,
+        createdAt: _user.createdAt,
+        number: int.parse(_phoneController.text.replaceAll(RegExp(r' '), '')),
+        age: int.parse(_ageController.text),
+      ));
+    } else {
+      setState(() {
+        _autoValidate = true;
+      });
+    }
   }
 }
 

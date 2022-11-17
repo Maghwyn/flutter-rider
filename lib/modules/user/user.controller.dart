@@ -1,6 +1,7 @@
 import 'package:flutter_project/config/service_locator.dart';
 import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/modules/auth/auth.controller.dart';
+import 'package:flutter_project/modules/user/user.service.dart';
 import 'package:flutter_project/modules/user/user.state.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +11,10 @@ class UserController extends GetxController {
   final User _user = inject<User>();
 
   final AuthenticationController _authenticationController = Get.find();
+
+  final UserServiceTemplate _userService;
+
+  UserController(this._userService);
 
   User get user => _userStateStream.value.props;
 
@@ -25,5 +30,11 @@ class UserController extends GetxController {
 
   void _getUser() {
     _userStateStream.value = UserState.fill(_user);
+  }
+
+  void updateUser(User user) {
+    final mongoUser = _userService.updateUsers(user);
+    // _userStateStream.value.updateUser(mongoUser);
+    // Get.back();
   }
 }

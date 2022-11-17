@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/modules/user/user.controller.dart';
-import 'package:flutter_project/modules/user/user_edit.page.dart';
+import 'package:flutter_project/modules/user/user.service.dart';
+import 'package:flutter_project/modules/user/user_edit/user_edit.page.dart';
 import 'package:flutter_project/modules/user/user.profile.dart';
-import 'package:flutter_project/modules/user/user_edit_horses.page.dart';
+import 'package:flutter_project/modules/user/user_horses_edit/user_edit_horses.page.dart';
 import 'package:get/get.dart';
 
 class UserPage extends StatelessWidget {
@@ -10,7 +11,7 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserController uc = Get.put(UserController());
+    UserController uc = Get.put(UserController(Get.put(UserService())));
     return Scaffold(
       appBar: AppBar(
         title: const Text(

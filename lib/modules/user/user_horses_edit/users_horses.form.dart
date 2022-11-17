@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_project/models/text_field.custom.dart';
 import 'package:flutter_project/modules/user/user.controller.dart';
+import 'package:flutter_project/modules/user/user.service.dart';
 import 'package:flutter_project/modules/user/user.state.dart';
 import 'package:get/get.dart';
 
-import '../auth/signup/signup.controller.dart';
+import '../../auth/signup/signup.controller.dart';
 
 class UserHorsesForm extends StatefulWidget {
   const UserHorsesForm({super.key});
@@ -28,7 +29,7 @@ class _UserHorsesFormState extends State<UserHorsesForm> {
 
   @override
   Widget build(BuildContext context) {
-    UserController uc = Get.put(UserController());
+    UserController uc = Get.put(UserController(Get.put(UserService())));
 
     return Form(
       key: _key,
@@ -44,39 +45,39 @@ class _UserHorsesFormState extends State<UserHorsesForm> {
                   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'),
             ),
             _textFormField(CustomTextField(
-                labelText: "Picture link",
+                labelText: "Picture horse link",
                 hintText:
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqqxEGfipGn_10dPwgJLe_LRCOWYgIKNEA3A&usqp=CAU",
                 controller: _pictureController,
-                validatorType: "image")),
+                validatorType: "image horse")),
             _textFormField(CustomTextField(
-                labelText: "Name",
+                labelText: "Name horse",
                 hintText: "Jeane Dark",
                 controller: _nameController,
-                validatorType: "name")),
+                validatorType: "name horse")),
             _textFormField(CustomTextField(
-                labelText: "Age",
+                labelText: "Age horse",
                 hintText: "19",
                 controller: _ageController,
-                validatorType: "age")),
+                validatorType: "age horse")),
             _textFormField(CustomTextField(
-                labelText: "Robe",
+                labelText: "Robe horse",
                 hintText: "robe",
                 controller: _robeController,
-                validatorType: "robe")),
+                validatorType: "robe horse")),
             _textFormField(CustomTextField(
-                labelText: "Race",
+                labelText: "Race horse",
                 hintText: "race",
                 controller: _raceController,
-                validatorType: "race")),
+                validatorType: "race horse")),
             _textFormField(CustomTextField(
-                labelText: "Sexe",
+                labelText: "Sexe horse",
                 hintText: "sexe",
                 controller: _sexeController,
-                validatorType: "sexe")),
+                validatorType: "sexe horse")),
             ElevatedButton(
               onPressed: () {},
-              child: const Text('Edit'),
+              child: const Text('Edit Horse'),
             ),
           ],
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_project/modules/user/user.controller.dart';
+import 'package:flutter_project/modules/user/user.service.dart';
 import 'package:get/get.dart';
 
 import '../auth/signup/signup.controller.dart';
@@ -20,7 +21,7 @@ class _UserProfileState extends State<UserProfile> {
 
   @override
   Widget build(BuildContext context) {
-    UserController uc = Get.put(UserController());
+    UserController uc = Get.put(UserController(Get.put(UserService())));
 
     return Column(children: [
       Center(

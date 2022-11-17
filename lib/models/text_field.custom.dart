@@ -22,6 +22,9 @@ class CustomTextField {
     "email": (String? value) => _emailValidator(value),
     "password": (String? value) => _passwordValidator(value),
     "name": (String? value) => _nameValidator(value),
+    "age": (String? value) => _ageValidator(value),
+    "phone_number": (String? value) => _phoneValidator(value),
+    "picture": (String? value) => _pictureValidator(value),
   };
 
   static String? _emailValidator(String? value) {
@@ -55,6 +58,38 @@ class CustomTextField {
 
     if (value.length < 6) {
       return 'Name should be at least 6 characters';
+    }
+
+    return null;
+  }
+
+  static String? _ageValidator(String? value) {
+    if (value == null) {
+      return 'Age is required.';
+    }
+
+    if (value.length > 3) {
+      return 'Age format is invalid';
+    }
+
+    return null;
+  }
+
+  static String? _phoneValidator(String? value) {
+    if (value == null) {
+      return 'Phone number is required.';
+    }
+
+    if (value.length < 10 && value.length > 15) {
+      return 'Phone number format is invalid';
+    }
+
+    return null;
+  }
+
+  static String? _pictureValidator(String? value) {
+    if (value == null) {
+      return 'Picture is required.';
     }
 
     return null;

@@ -7,4 +7,6 @@ class UserState {
   UserState.fill(this.user);
 
   User get props => user;
+
+  void updateUser(mongoUser) {}
 }

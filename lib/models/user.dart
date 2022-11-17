@@ -12,7 +12,7 @@ class User {
 
   User({
     this.id,
-    required this.name, 
+    required this.name,
     required this.email,
     required this.createdAt,
     required this.role,
@@ -22,5 +22,6 @@ class User {
   });
 
   @override
-  String toString() => 'User { name: $name, email: $email}';
+  String toString() =>
+      'User { name: $name, email: $email, id: $id, createAt: $createdAt, role: $role, picture:$picture, number:$number, age:$age}';
 }
