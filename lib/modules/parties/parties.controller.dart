@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/models/party_participant.dart';
-import 'package:flutter_project/modules/party/widget/parties_card.dart';
-import 'package:flutter_project/modules/party/widget/parties_comment.dart';
+import 'package:flutter_project/modules/parties/widget/parties_card.dart';
+import 'package:flutter_project/modules/parties/widget/parties_comment.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_project/config/service_locator.dart';
 import 'package:flutter_project/models/party.dart';
 import 'package:flutter_project/models/user.dart';
-import 'package:flutter_project/modules/party/parties.service.dart';
-import 'package:flutter_project/modules/party/parties.state.dart';
+import 'package:flutter_project/modules/parties/parties.service.dart';
+import 'package:flutter_project/modules/parties/parties.state.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 class PartiesController  extends GetxController {

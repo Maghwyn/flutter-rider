@@ -7,8 +7,8 @@ import 'package:flutter_project/config/constants.dart';
 import 'package:flutter_project/modules/courses/courses.state.dart';
 import 'package:flutter_project/utils/time_format.dart';
 import 'package:flutter_project/models/party.dart';
-import 'package:flutter_project/modules/party/parties.controller.dart';
-import 'package:flutter_project/modules/party/parties.service.dart';
+import 'package:flutter_project/modules/parties/parties.controller.dart';
+import 'package:flutter_project/modules/parties/parties.service.dart';
 
 class PartyForm extends StatelessWidget {
   const PartyForm({super.key});

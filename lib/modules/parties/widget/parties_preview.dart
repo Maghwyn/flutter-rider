@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/modules/party/widget/parties_comment_form.dart';
+import 'package:flutter_project/modules/parties/widget/parties_comment_form.dart';
 import 'package:get/get.dart';
 
-import 'package:flutter_project/modules/party/parties.controller.dart';
-import 'package:flutter_project/modules/party/parties.service.dart';
+import 'package:flutter_project/modules/parties/parties.controller.dart';
+import 'package:flutter_project/modules/parties/parties.service.dart';
 
 class PartyPreview extends StatelessWidget {
   const PartyPreview({super.key});

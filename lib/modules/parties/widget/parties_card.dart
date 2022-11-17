@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/models/party.dart';
-import 'package:flutter_project/modules/party/parties.controller.dart';
-import 'package:flutter_project/modules/party/parties.service.dart';
-import 'package:flutter_project/modules/party/widget/parties_preview.dart';
+import 'package:flutter_project/modules/parties/parties.controller.dart';
+import 'package:flutter_project/modules/parties/parties.service.dart';
+import 'package:flutter_project/modules/parties/widget/parties_preview.dart';
 import 'package:get/get.dart';
 
 class PartyCard extends StatefulWidget {

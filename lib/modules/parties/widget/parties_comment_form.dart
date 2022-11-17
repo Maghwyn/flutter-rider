@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/models/party_participant.dart';
 import 'package:get/get.dart';
 
-import 'package:flutter_project/modules/party/parties.controller.dart';
-import 'package:flutter_project/modules/party/parties.service.dart';
+import 'package:flutter_project/modules/parties/parties.controller.dart';
+import 'package:flutter_project/modules/parties/parties.service.dart';
 
 class PartyCommentForm extends StatelessWidget {
   const PartyCommentForm({super.key});
