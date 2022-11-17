@@ -2,10 +2,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'package:flutter_project/layout/auth/auth.layout.dart';
+import 'package:flutter_project/modules/auth/auth.state.dart';
+import 'package:flutter_project/modules/loader/page.dart';
 import 'package:flutter_project/config/mongo.dart';
 import 'package:flutter_project/config/service_locator.dart';
 import 'package:flutter_project/layout/app/app.layout.dart';
-import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/modules/auth/auth.controller.dart';
 import 'package:flutter_project/modules/auth/auth.service.dart';
 import 'package:flutter_project/router/auth.router.dart';
