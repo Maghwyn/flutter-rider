@@ -7,15 +7,11 @@ class UserEditPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'EditUser',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      body: const UserForm(),
+      appBar: AppBar(),
+      body: const SafeArea(
+        minimum: EdgeInsets.all(16),
+        child: UserForm(),
+      )
     );
   }
 }

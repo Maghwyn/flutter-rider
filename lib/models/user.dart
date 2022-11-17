@@ -7,8 +7,8 @@ class User {
   final DateTime createdAt;
   final List<dynamic> role;
   final String picture;
-  final int? number;
-  final int? age;
+  final String? number;
+  final String? age;
 
   User({
     this.id,

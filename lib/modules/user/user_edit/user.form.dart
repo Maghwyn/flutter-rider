@@ -8,14 +8,28 @@ import 'package:flutter_project/modules/user/user.service.dart';
 import 'package:flutter_project/modules/user/user_edit/user_edit.state.dart';
 import 'package:get/get.dart';
 
-class UserForm extends StatefulWidget {
+class UserForm extends StatelessWidget {
   const UserForm({super.key});
 
   @override
-  State<UserForm> createState() => _UserFormState();
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: SafeArea(
+        minimum: EdgeInsets.all(16),
+        child: _UserFormState(),
+      )
+    );
+  }
 }
 
-class _UserFormState extends State<UserForm> {
+class _UserFormState extends StatefulWidget {
+  const _UserFormState({super.key});
+
+  @override
+  State<_UserFormState> createState() => __UserFormState();
+}
+
+class __UserFormState extends State<_UserFormState> {
   final _editcontroller = Get.put(UserController(Get.put(UserService())));
 
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
@@ -33,9 +47,11 @@ class _UserFormState extends State<UserForm> {
   @override
   Widget build(BuildContext context) {
     UserController uc = Get.put(UserController(Get.put(UserService())));
-    _nameController.text = uc.user.name;
-    _emailController.text = uc.user.email;
-    _pictureController.text = uc.user.picture;
+    _nameController.text = _user.name;
+    _emailController.text = _user.email;
+    _pictureController.text = _user.picture;
+    _phoneController.text = _user.number ?? "";
+    _ageController.text = _user.age ?? "";
 
     return Form(
       key: _key,
@@ -45,10 +61,23 @@ class _UserFormState extends State<UserForm> {
         child: Wrap(
           runSpacing: 18,
           crossAxisAlignment: WrapCrossAlignment.center,
+          alignment: WrapAlignment.center,
           children: <Widget>[
-            const Image(
-              image: NetworkImage(
-                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'),
+            Container(
+              width: 150,
+              height: 150,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(uc.user.picture),
+                  fit: BoxFit.cover,
+                ),
+                border: Border.all(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    width: 1.5),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(50),
+                ),
+              ),
             ),
             _textFormField(CustomTextField(
                 labelText: "Name",
@@ -64,7 +93,7 @@ class _UserFormState extends State<UserForm> {
                 labelText: "Phone number",
                 hintText: "06 12 12 12 12",
                 controller: _phoneController,
-                validatorType: "phone_number")),
+                validatorType: "phone")),
             _textFormField(CustomTextField(
                 labelText: "Age",
                 hintText: "19",
@@ -72,8 +101,7 @@ class _UserFormState extends State<UserForm> {
                 validatorType: "age")),
             _textFormField(CustomTextField(
                 labelText: "Picture link",
-                hintText:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqqxEGfipGn_10dPwgJLe_LRCOWYgIKNEA3A&usqp=CAU",
+                hintText: "https://example.com/image.png",
                 controller: _pictureController,
                 validatorType: "picture")),
             SwitchListTile(
@@ -116,8 +144,8 @@ class _UserFormState extends State<UserForm> {
         picture: _pictureController.text,
         role: _user.role,
         createdAt: _user.createdAt,
-        number: int.parse(_phoneController.text.replaceAll(RegExp(r' '), '')),
-        age: int.parse(_ageController.text),
+        number: _phoneController.text,
+        age: _ageController.text,
       ));
     } else {
       setState(() {
@@ -130,6 +158,14 @@ class _UserFormState extends State<UserForm> {
 dynamic _textFormField(CustomTextField textField) {
   return TextFormField(
     decoration: InputDecoration(
+      enabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.purple, width: 1),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      border: OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.purple, width: 1),
+        borderRadius: BorderRadius.circular(10),
+      ),
       labelText: textField.labelText,
       hintText: textField.hintText,
       filled: true,

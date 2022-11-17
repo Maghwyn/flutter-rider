@@ -12,6 +12,7 @@ class UserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserController uc = Get.put(UserController(Get.put(UserService())));
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -22,8 +23,7 @@ class UserPage extends StatelessWidget {
         ),
       ),
       endDrawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
+        child: Obx(() => ListView(
           padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
@@ -42,8 +42,23 @@ class UserPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              currentAccountPicture: const CircleAvatar(
-                backgroundColor: Colors.white,
+              currentAccountPicture: CircleAvatar(
+                child:  Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(uc.user.picture),
+                      fit: BoxFit.cover,
+                    ),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        width: 1.5),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(50),
+                    ),
+                  ),
+                ),
               ),
             ),
             ListTile(
@@ -72,9 +87,12 @@ class UserPage extends StatelessWidget {
               onTap: () => uc.signOut(),
             ),
           ],
-        ),
+        )),
       ),
-      body: const UserProfile(),
+      body: const SafeArea(
+        minimum: EdgeInsets.all(16),
+        child: UserProfile(),
+      )
     );
   }
 }

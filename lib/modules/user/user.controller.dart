@@ -16,7 +16,7 @@ class UserController extends GetxController {
 
   UserController(this._userService);
 
-  User get user => _userStateStream.value.props;
+  User get user => _userStateStream.value.user;
 
   @override
   void onInit() {
@@ -32,9 +32,11 @@ class UserController extends GetxController {
     _userStateStream.value = UserState.fill(_user);
   }
 
-  void updateUser(User user) {
-    final mongoUser = _userService.updateUsers(user);
-    // _userStateStream.value.updateUser(mongoUser);
-    // Get.back();
+  void updateUser(User user) async {
+    final mongoUser = await _userService.updateUsers(user);
+    unregisterLoggedUserLocator();
+    setupLoggedUserLocator(mongoUser);
+    _userStateStream.value = UserState.fill(mongoUser);
+    Get.back();
   }
 }
