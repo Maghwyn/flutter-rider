@@ -25,23 +25,23 @@ class UserPage extends StatelessWidget {
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
-            const UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Colors.purple),
+            UserAccountsDrawerHeader(
+              decoration: const BoxDecoration(color: Colors.purple),
               accountName: Text(
-                "Name",
-                style: TextStyle(
+                uc.user.name,
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               accountEmail: Text(
-                "06 12 12 12 12",
-                style: TextStyle(
+                uc.user.email,
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              currentAccountPicture: CircleAvatar(
+              currentAccountPicture: const CircleAvatar(
                 backgroundColor: Colors.white,
               ),
             ),

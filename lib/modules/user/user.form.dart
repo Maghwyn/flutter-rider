@@ -27,85 +27,73 @@ class _UserFormState extends State<UserForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Form(
-        key: _key,
-        autovalidateMode:
-            _autoValidate ? AutovalidateMode.always : AutovalidateMode.disabled,
-        child: SingleChildScrollView(
-          child: Wrap(
-            runSpacing: 18,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: <Widget>[
-              const Image(
-                image: NetworkImage(
-                    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'),
-              ),
-              _textFormField(CustomTextField(
-                  labelText: "Name",
-                  hintText: "Jeane Dark",
-                  controller: _nameController,
-                  validatorType: "name")),
-              _textFormField(CustomTextField(
-                  labelText: "Phone Number",
-                  hintText: "06 12 12 12 12",
-                  controller: _numberController,
-                  validatorType: "phone")),
-              _textFormField(CustomTextField(
-                  labelText: "Age",
-                  hintText: "19",
-                  controller: _ageController,
-                  validatorType: "age")),
-              _textFormField(CustomTextField(
-                  labelText: "Picture link",
-                  hintText:
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqqxEGfipGn_10dPwgJLe_LRCOWYgIKNEA3A&usqp=CAU",
-                  controller: _pictureController,
-                  validatorType: "age")),
-              SwitchListTile(
-                title: const Text('Demi-Pensionnaire'),
-                value: _lights,
-                onChanged: (bool value) {
-                  setState(() {
-                    _lights = value;
-                  });
-                },
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Edit'),
-              ),
-              if (_controller.state is UserFailure)
-                Text(
-                  (_controller.state as UserFailure).error,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Get.theme.errorColor),
-                ),
-              if (_controller.state is UserFailure)
-                const Center(
-                  child: CircularProgressIndicator(),
-                )
-            ],
-          ),
+    return Form(
+      key: _key,
+      autovalidateMode:
+          _autoValidate ? AutovalidateMode.always : AutovalidateMode.disabled,
+      child: SingleChildScrollView(
+        child: Wrap(
+          runSpacing: 18,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: <Widget>[
+            const Image(
+              image: NetworkImage(
+                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'),
+            ),
+            _textFormField(CustomTextField(
+                labelText: "Name",
+                hintText: "Jeane Dark",
+                controller: _nameController,
+                validatorType: "name")),
+            _textFormField(CustomTextField(
+                labelText: "Phone Number",
+                hintText: "06 12 12 12 12",
+                controller: _numberController,
+                validatorType: "phone")),
+            _textFormField(CustomTextField(
+                labelText: "Age",
+                hintText: "19",
+                controller: _ageController,
+                validatorType: "age")),
+            _textFormField(CustomTextField(
+                labelText: "Picture link",
+                hintText:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqqxEGfipGn_10dPwgJLe_LRCOWYgIKNEA3A&usqp=CAU",
+                controller: _pictureController,
+                validatorType: "age")),
+            SwitchListTile(
+              title: const Text('Demi-Pensionnaire'),
+              value: _lights,
+              onChanged: (bool value) {
+                setState(() {
+                  _lights = value;
+                });
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Edit'),
+            ),
+          ],
         ),
-      );
-    });
-  }
-
-  dynamic _textFormField(CustomTextField textField) {
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: textField.labelText,
-        hintText: textField.hintText,
-        filled: true,
-        isDense: true,
       ),
-      obscureText: textField.validatorType == "password",
-      keyboardType: textField.validatorType == "email"
-          ? TextInputType.emailAddress
-          : TextInputType.text,
-      controller: textField.controller,
-      validator: (value) => textField.getValidator(value),
     );
   }
+}
+
+dynamic _textFormField(CustomTextField textField) {
+  return TextFormField(
+    decoration: InputDecoration(
+      labelText: textField.labelText,
+      hintText: textField.hintText,
+      filled: true,
+      isDense: true,
+    ),
+    obscureText: textField.validatorType == "password",
+    keyboardType: textField.validatorType == "email"
+        ? TextInputType.emailAddress
+        : TextInputType.text,
+    controller: textField.controller,
+    validator: (value) => textField.getValidator(value),
+  );
 }
