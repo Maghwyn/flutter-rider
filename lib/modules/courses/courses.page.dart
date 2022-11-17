@@ -17,12 +17,8 @@ class CoursesPage extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const Text(
-                  "• Courses list",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)
-                ),
                 ElevatedButton(
                   onPressed: () { Get.to(const CourseForm()); },
                   child: const Text('New Course'),
@@ -36,14 +32,15 @@ class CoursesPage extends StatelessWidget {
               endIndent: 0,
               color: Colors.grey[300],
             ),
-            Expanded(
-              flex: 10,
-              child: Obx(
-                    () => ListView(
-                  children: cc.courses,
-                ),
+            Flexible(
+              child: GridView.count(
+                primary: false,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                children: cc.courses,
               ),
-            ),
+            )
           ],
         )
       )
