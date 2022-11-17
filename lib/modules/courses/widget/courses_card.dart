@@ -16,8 +16,8 @@ class CourseCard extends StatefulWidget {
   final DateTime date;
   final String duration;
   final String speciality;
-  final bool isMine;
   final String status;
+  final bool isMine;
 
   @override
   State<CourseCard> createState() => _CourseCard();
@@ -71,13 +71,13 @@ class _CourseCard extends State<CourseCard> {
                         direction: Axis.vertical,
                         spacing: 20,
                         children: [
-                          Text("• ${widget.speciality}",
+                          Text(widget.speciality,
                             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                           ),
-                          Text("• ${widget.duration == "1" ? "1 hour" : "30 minutes"}",
+                          Text("- ${widget.duration == "1" ? "1 hour" : "30 minutes"}",
                             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                           ),
-                          Text("• ${DateFormat("yyyy-MM-dd").format(widget.date)}",
+                          Text("- ${DateFormat("yyyy-MM-dd").format(widget.date)}",
                             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                           ),
                         ],
