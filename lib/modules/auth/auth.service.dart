@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutter_project/config/mongo.dart';
 import 'package:flutter_project/config/service_locator.dart';
 import 'package:flutter_project/models/user.dart';
+import 'package:mongo_dart/src/database/commands/query_and_write_operation_commands/return_classes/write_result.dart';
 
 abstract class AuthenticationServiceTemplate extends GetxService {
   Future<User?> getCurrentUser();
