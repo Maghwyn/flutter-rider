@@ -36,12 +36,14 @@ class AuthenticationService extends AuthenticationServiceTemplate {
     }
 
     return User(
-      id: user["_id"] as ObjectId,
-      name: user["name"] as String, 
-      email: user["email"] as String,
-      createdAt: user["createdAt"] as DateTime,
-      role: user["role"] as List<dynamic>,
+      id: user["_id"],
+      name: user["name"],
+      email: user["email"],
+      createdAt: user["createdAt"],
       picture: user["picture"] as String,
+      role: user["role"] as List<dynamic>,
+      number: user["number"],
+      age: user["age"],
     );
   }
 
@@ -70,11 +72,13 @@ class AuthenticationService extends AuthenticationServiceTemplate {
     final user = mongoDocument.document;
     return User(
       id: mongoDocument.id as ObjectId,
-      name: user!["name"] as String, 
+      name: user!["name"] as String,
       email: user["email"] as String,
       createdAt: user["createdAt"] as DateTime,
-      role: user["role"] as List<dynamic>,
       picture: user["picture"] as String,
+      role: user["role"] as List<dynamic>,
+      number: user["number"] as String,
+      age: user["age"] as String,
     );
   }
 }
