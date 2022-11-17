@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_project/models/party.dart';
 import 'package:flutter_project/models/party_participant.dart';
 import 'package:get/get.dart';
+import 'package:mongo_dart/mongo_dart.dart';
 
 class PartiesState {
   late RxList<Party> parties = RxList<Party>();
@@ -15,6 +16,10 @@ class PartiesState {
 
   deleteParty(Party party) {
     parties.remove(party);
+  }
+
+  removeById(ObjectId partyId) {
+    parties.removeWhere((element) => element.id == partyId);
   }
 
   List<Party> get props => parties;
