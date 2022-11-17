@@ -5,11 +5,9 @@ import 'package:get/get.dart';
 import 'package:flutter_project/config/mongo.dart';
 import 'package:flutter_project/config/service_locator.dart';
 import 'package:flutter_project/layout/app/app.layout.dart';
-import 'package:flutter_project/layout/auth/auth.layout.dart';
+import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/modules/auth/auth.controller.dart';
 import 'package:flutter_project/modules/auth/auth.service.dart';
-import 'package:flutter_project/modules/auth/auth.state.dart';
-import 'package:flutter_project/modules/loader/page.dart';
 import 'package:flutter_project/router/auth.router.dart';
 
 Future main() async {
@@ -34,24 +32,24 @@ class ProjectApp extends GetWidget<AuthenticationController> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      getPages: authRoutes(),
-      title: 'Flutter Obx Auth',
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: Obx(() {
-        if (controller.state is UnAuthenticated) {
-          return const AuthLayout();
-        }
+        getPages: authRoutes(),
+        title: 'Flutter Obx Auth',
+        theme: ThemeData(
+          primarySwatch: Colors.purple,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: Obx(() {
+          if (controller.state is UnAuthenticated) {
+            return const AuthLayout();
+          }
 
-        if (controller.state is Authenticated) {
-          return AppLayout(
-            user: (controller.state as Authenticated).user,
-          );
-        }
-        return const SplashScreen();
+          if (controller.state is Authenticated) {
+            return AppLayout(
+              user: (controller.state as Authenticated).user,
+            );
+          }
+          return const SplashScreen();
       }),
     );
   }

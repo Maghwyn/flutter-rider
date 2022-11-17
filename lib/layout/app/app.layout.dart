@@ -3,7 +3,10 @@ import 'package:flutter_project/layout/app/app.layout.controller.dart';
 import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/modules/courses/courses.page.dart';
 import 'package:flutter_project/modules/placeholder/page.dart';
+import 'package:flutter_project/modules/user/user.profile.dart';
 import 'package:get/get.dart';
+
+import '../../modules/user/user.page.dart';
 
 class AppLayout extends StatelessWidget {
   const AppLayout({super.key, required User user});
@@ -22,7 +25,7 @@ class AppLayout extends StatelessWidget {
                 PlaceholderPage(),
                 CoursesPage(),
                 PlaceholderPage(),
-                PlaceholderPage(),
+                UserPage(),
               ],
             ),
           ),
@@ -33,8 +36,8 @@ class AppLayout extends StatelessWidget {
             onTap: controller.changeTabIndex,
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Icons.privacy_tip),
-                label: 'Sample 1',
+                icon: Icon(Icons.auto_graph_outlined),
+                label: 'Flux',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.privacy_tip),
@@ -45,12 +48,12 @@ class AppLayout extends StatelessWidget {
                 label: 'Courses',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.privacy_tip),
-                label: 'Sample 4',
+                icon: Icon(Icons.hourglass_empty),
+                label: 'Chevaux',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.privacy_tip),
-                label: 'Sample 5',
+                icon: Icon(Icons.person),
+                label: 'Profile',
               ),
             ],
           ),
