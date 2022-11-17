@@ -23,6 +23,7 @@ class AppLayout extends StatelessWidget {
                 PlaceholderPage(),
                 CoursesPage(),
                 PlaceholderPage(),
+                PlaceholderPage(),
                 UserPage(),
               ],
             ),
@@ -39,7 +40,7 @@ class AppLayout extends StatelessWidget {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.privacy_tip),
-                label: 'Smaple 2',
+                label: 'Sample 2',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.menu_book_sharp),
