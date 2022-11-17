@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/modules/user/user.controller.dart';
-import 'package:flutter_project/modules/user/user_edit.page.dart';
+import 'package:flutter_project/modules/user/user.service.dart';
+import 'package:flutter_project/modules/user/user_edit/user_edit.page.dart';
 import 'package:flutter_project/modules/user/user.profile.dart';
-import 'package:flutter_project/modules/user/user_edit_horses.page.dart';
+import 'package:flutter_project/modules/user/user_horses_edit/user_edit_horses.page.dart';
 import 'package:get/get.dart';
 
 class UserPage extends StatelessWidget {
@@ -10,7 +11,8 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserController uc = Get.put(UserController());
+    UserController uc = Get.put(UserController(Get.put(UserService())));
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -21,28 +23,42 @@ class UserPage extends StatelessWidget {
         ),
       ),
       endDrawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
+        child: Obx(() => ListView(
           padding: EdgeInsets.zero,
           children: [
-            const UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Colors.purple),
+            UserAccountsDrawerHeader(
+              decoration: const BoxDecoration(color: Colors.purple),
               accountName: Text(
-                "Name",
-                style: TextStyle(
+                uc.user.name,
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               accountEmail: Text(
-                "06 12 12 12 12",
-                style: TextStyle(
+                uc.user.email,
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
+                child:  Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(uc.user.picture),
+                      fit: BoxFit.cover,
+                    ),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        width: 1.5),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(50),
+                    ),
+                  ),
+                ),
               ),
             ),
             ListTile(
@@ -71,9 +87,12 @@ class UserPage extends StatelessWidget {
               onTap: () => uc.signOut(),
             ),
           ],
-        ),
+        )),
       ),
-      body: const UserProfile(),
+      body: const SafeArea(
+        minimum: EdgeInsets.all(16),
+        child: UserProfile(),
+      )
     );
   }
 }
