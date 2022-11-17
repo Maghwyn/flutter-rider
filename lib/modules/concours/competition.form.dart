@@ -5,24 +5,24 @@ import 'package:flutter_project/modules/concours/competition.controller.dart';
 import 'package:flutter_project/modules/concours/competition.state.dart';
 import 'package:get/get.dart';
 
-class ConcoursPage extends StatelessWidget {
-  const ConcoursPage({super.key});
+class CompetitionPage extends StatelessWidget {
+  const CompetitionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
         height: 500,
-        child: _ConcoursForm()
+        child: _CompetitionForm()
     );
   }
 }
 
-class _ConcoursForm extends StatefulWidget {
+class _CompetitionForm extends StatefulWidget {
   @override
-  __ConcoursFormState createState() => __ConcoursFormState();
+  __CompetitionFormState createState() => __CompetitionFormState();
 }
 
-class __ConcoursFormState extends State<_ConcoursForm> {
+class __CompetitionFormState extends State<_CompetitionForm> {
   final _controller = Get.put(CompetitionController());
 
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
@@ -71,8 +71,8 @@ class __ConcoursFormState extends State<_ConcoursForm> {
               ElevatedButton(
                 onPressed: _controller.state is ConcoursLoading
                     ? () {}
-                    : _onCoursButtonPressed,
-                child: const Text('Create lesson'),
+                    : _onConcoursButtonPressed,
+                child: const Text('Create Competition'),
               ),
               if (_controller.state is ConcoursFailure)
                 Text(
@@ -104,7 +104,7 @@ class __ConcoursFormState extends State<_ConcoursForm> {
     );
   }
 
-  _onCoursButtonPressed() {
+  _onConcoursButtonPressed() {
     if (_key.currentState!.validate()) {
       _controller.concours(_nameController.text, _dateController.text,
           _adressController.text, _pictureController.text);
