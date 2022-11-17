@@ -25,11 +25,11 @@ class CustomTextField {
   };
 
   static String? _emailValidator(String? value) {
-    if(value == null) {
+    if (value == null) {
       return 'Email is required.';
     }
 
-    if(emailFormat.hasMatch(value) == false) {
+    if (emailFormat.hasMatch(value) == false) {
       return 'Email format is invalid';
     }
 
@@ -41,7 +41,7 @@ class CustomTextField {
       return 'Password is required.';
     }
 
-    if(value.length < 8) {
+    if (value.length < 8) {
       return 'Password should be at least 8 characters';
     }
 
@@ -49,11 +49,11 @@ class CustomTextField {
   }
 
   static String? _nameValidator(String? value) {
-    if(value == null) {
+    if (value == null) {
       return 'Name is required.';
     }
 
-    if(value.length < 6) {
+    if (value.length < 6) {
       return 'Name should be at least 6 characters';
     }
 

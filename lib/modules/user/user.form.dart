@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_project/models/text_field.custom.dart';
+import 'package:flutter_project/modules/user/user.controller.dart';
 import 'package:flutter_project/modules/user/user.state.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +19,8 @@ class _UserFormState extends State<UserForm> {
 
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   final _nameController = TextEditingController();
-  final _numberController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _ageController = TextEditingController();
   final _pictureController = TextEditingController();
   final bool _autoValidate = false;
@@ -27,6 +29,11 @@ class _UserFormState extends State<UserForm> {
 
   @override
   Widget build(BuildContext context) {
+    UserController uc = Get.put(UserController());
+    _nameController.text = uc.user.name;
+    _emailController.text = uc.user.email;
+    _pictureController.text = uc.user.picture;
+
     return Form(
       key: _key,
       autovalidateMode:
@@ -46,10 +53,15 @@ class _UserFormState extends State<UserForm> {
                 controller: _nameController,
                 validatorType: "name")),
             _textFormField(CustomTextField(
-                labelText: "Phone Number",
+                labelText: "Email",
+                hintText: "example@gmail.com",
+                controller: _emailController,
+                validatorType: "email")),
+            _textFormField(CustomTextField(
+                labelText: "Phone number",
                 hintText: "06 12 12 12 12",
-                controller: _numberController,
-                validatorType: "phone")),
+                controller: _phoneController,
+                validatorType: "phone_number")),
             _textFormField(CustomTextField(
                 labelText: "Age",
                 hintText: "19",

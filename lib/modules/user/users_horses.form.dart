@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_project/models/text_field.custom.dart';
+import 'package:flutter_project/modules/user/user.controller.dart';
 import 'package:flutter_project/modules/user/user.state.dart';
 import 'package:get/get.dart';
 
@@ -27,6 +28,8 @@ class _UserHorsesFormState extends State<UserHorsesForm> {
 
   @override
   Widget build(BuildContext context) {
+    UserController uc = Get.put(UserController());
+
     return Form(
       key: _key,
       autovalidateMode:
