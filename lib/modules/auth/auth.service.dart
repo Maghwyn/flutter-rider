@@ -1,10 +1,9 @@
-import 'package:mongo_dart/mongo_dart.dart' show DbCollection, ObjectId;
+import 'package:mongo_dart/mongo_dart.dart' show DbCollection, ObjectId, WriteResult;
 import 'package:get/get.dart';
 
 import 'package:flutter_project/config/mongo.dart';
 import 'package:flutter_project/config/service_locator.dart';
 import 'package:flutter_project/models/user.dart';
-import 'package:mongo_dart/src/database/commands/query_and_write_operation_commands/return_classes/write_result.dart';
 
 abstract class AuthenticationServiceTemplate extends GetxService {
   Future<User?> getCurrentUser();
@@ -40,7 +39,7 @@ class AuthenticationService extends AuthenticationServiceTemplate {
       name: user["name"] as String, 
       email: user["email"] as String,
       createdAt: user["createdAt"] as DateTime,
-      role: user["role"] as List<String>,
+      role: user["role"] as List<dynamic>,
       picture: user["picture"] as String,
     );
   }
@@ -73,7 +72,7 @@ class AuthenticationService extends AuthenticationServiceTemplate {
       name: user!["name"] as String, 
       email: user["email"] as String,
       createdAt: user["createdAt"] as DateTime,
-      role: user["role"] as List<String>,
+      role: user["role"] as List<dynamic>,
       picture: user["picture"] as String,
     );
   }
