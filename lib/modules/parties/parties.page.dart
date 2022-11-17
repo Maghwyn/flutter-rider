@@ -18,12 +18,8 @@ class PartiesPage extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const Text(
-                  "• Parties list",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)
-                ),
                 ElevatedButton(
                   onPressed: () { Get.to(const PartyForm()); },
                   child: const Text('New Party'),

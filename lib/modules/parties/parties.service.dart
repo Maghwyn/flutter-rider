@@ -65,6 +65,7 @@ class PartiesService extends PartiesServiceTemplate {
         id: partyParticipant["_id"],
         userId: partyParticipant["userId"],
         partyId: partyParticipant["partyId"],
+        name: partyParticipant["name"],
         comment: partyParticipant["comment"],
         createdAt: partyParticipant["createdAt"],
         picture: partyParticipant["picture"],
@@ -110,6 +111,7 @@ class PartiesService extends PartiesServiceTemplate {
     WriteResult mongoDocument = await _partyParticipants.insertOne({
       "userId": _user.id,
       "partyId": partyId,
+      "name": _user.name,
       "comment": pp.comment,
       "createdAt": DateTime.now(),
       "picture": _user.picture,
@@ -120,6 +122,7 @@ class PartiesService extends PartiesServiceTemplate {
       id: mongoDocument.id as ObjectId,
       userId: partyParticipant!["userId"] as ObjectId,
       partyId: partyParticipant["partyId"] as ObjectId,
+      name: partyParticipant["name"] as String,
       comment: partyParticipant["comment"] as String,
       createdAt: partyParticipant["createdAt"] as DateTime,
       picture: partyParticipant["picture"] as String,
