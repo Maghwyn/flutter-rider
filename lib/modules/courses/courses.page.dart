@@ -33,13 +33,13 @@ class CoursesPage extends StatelessWidget {
               color: Colors.grey[300],
             ),
             Flexible(
-              child: GridView.count(
+              child: Obx(() => GridView.count(
                 primary: false,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 crossAxisCount: 2,
                 children: cc.courses,
-              ),
+              )),
             )
           ],
         )
