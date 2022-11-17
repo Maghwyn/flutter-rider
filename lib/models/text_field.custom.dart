@@ -23,12 +23,16 @@ class CustomTextField {
     "password": (String? value) => _passwordValidator(value),
     "name": (String? value) => _nameValidator(value),
     "age": (String? value) => _ageValidator(value),
-    "phone_number": (String? value) => _phoneValidator(value),
+    "phone": (String? value) => _phoneValidator(value),
     "picture": (String? value) => _pictureValidator(value),
   };
 
   static String? _emailValidator(String? value) {
     if (value == null) {
+      return 'Email is required.';
+    }
+
+    if (value.isEmpty) {
       return 'Email is required.';
     }
 
@@ -44,6 +48,10 @@ class CustomTextField {
       return 'Password is required.';
     }
 
+    if (value.isEmpty) {
+      return 'Password is required.';
+    }
+
     if (value.length < 8) {
       return 'Password should be at least 8 characters';
     }
@@ -53,6 +61,10 @@ class CustomTextField {
 
   static String? _nameValidator(String? value) {
     if (value == null) {
+      return 'Name is required.';
+    }
+
+    if (value.isEmpty) {
       return 'Name is required.';
     }
 
@@ -68,6 +80,10 @@ class CustomTextField {
       return 'Age is required.';
     }
 
+    if (value.isEmpty) {
+      return 'Age is required.';
+    }
+
     if (value.length > 3) {
       return 'Age format is invalid';
     }
@@ -80,6 +96,11 @@ class CustomTextField {
       return 'Phone number is required.';
     }
 
+    if (value.isEmpty) {
+      return 'Phone number is required.';
+    }
+
+
     if (value.length < 10 && value.length > 15) {
       return 'Phone number format is invalid';
     }
@@ -89,6 +110,10 @@ class CustomTextField {
 
   static String? _pictureValidator(String? value) {
     if (value == null) {
+      return 'Picture is required.';
+    }
+
+    if (value.isEmpty) {
       return 'Picture is required.';
     }
 
