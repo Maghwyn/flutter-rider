@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/config/service_locator.dart';
 import 'package:flutter_project/models/course.dart';
 import 'package:flutter_project/models/user.dart';
-import 'package:flutter_project/modules/courses/courses.card.dart';
+import 'package:flutter_project/modules/courses/widget/courses_card.dart';
 import 'package:flutter_project/modules/courses/courses.service.dart';
 import 'package:flutter_project/modules/courses/courses.state.dart';
 import 'package:get/get.dart';

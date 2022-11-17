@@ -1,6 +1,5 @@
 import 'package:flutter_project/modules/auth/auth.page.dart';
-import 'package:flutter_project/modules/courses/courses.form.dart';
-import 'package:flutter_project/modules/home/page.dart';
+import 'package:flutter_project/modules/courses/widget/courses_form.dart';
 import 'package:flutter_project/modules/placeholder/page.dart';
 import 'package:get/get.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/modules/courses/courses.controller.dart';
-import 'package:flutter_project/modules/courses/courses.form.dart';
+import 'package:flutter_project/modules/courses/widget/courses_form.dart';
 import 'package:flutter_project/modules/courses/courses.service.dart';
 import 'package:get/get.dart';
 
