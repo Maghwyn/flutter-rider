@@ -14,13 +14,6 @@ class LoginPage extends StatelessWidget {
       height: 500,
       child: _SignInForm()
     );
-  //     body: SizedBox(
-  //       width: double.infinity,
-  //       height: double.infinity,
-  //       // minimum: const EdgeInsets.all(16),
-  //       child: Text("Bullshit")/*_SignInForm()*/,
-  //     )
-  //   );
   }
 }
 
@@ -87,6 +80,14 @@ class __SignInFormState extends State<_SignInForm> {
   dynamic _textFormField(CustomTextField textField) {
     return TextFormField(
       decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.purple, width: 1),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.purple, width: 1),
+          borderRadius: BorderRadius.circular(10),
+        ),
         labelText: textField.labelText,
         hintText: textField.hintText,
         filled: true,

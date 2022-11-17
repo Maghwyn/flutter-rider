@@ -55,8 +55,8 @@ class __PartyCommentForm extends State<_PartyCommentForm> {
                 ),
                 filled: true,
                 isDense: true,
-                labelText: "Commentaire",
-                hintText: "Write my message"
+                labelText: "Comment",
+                hintText: "I'm briging a bag of chips !"
               ),
               // validator: (value) => value!.isEmpty 
               //   ? null
@@ -77,10 +77,10 @@ class __PartyCommentForm extends State<_PartyCommentForm> {
 
   _onCommentButtonPressed() {
     if (_key.currentState!.validate()) {
-      print("test");
       _controller.addPartyParticipant(PartyParticipant(
         comment: _commentController.text,
       ), _controller.partyId);
+      _commentController.clear();
     } else {
       setState(() {
         _autoValidate = true;

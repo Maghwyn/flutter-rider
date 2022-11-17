@@ -47,6 +47,7 @@ class PartiesController  extends GetxController {
   List<Widget> get participantsComments => 
     _partyParticipantsStateStream.value.partyParticipants.map((participant) => 
       PartyComment(
+        name: participant.name!,
         comment: participant.comment,
         picture: participant.picture!,
         createdAt: participant.createdAt!,

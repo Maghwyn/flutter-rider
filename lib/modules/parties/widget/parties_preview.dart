@@ -22,7 +22,9 @@ class PartyPreview extends StatelessWidget {
         minimum: const EdgeInsets.all(16),
         child: Column(
           children: [
-            pc.partyCard,
+            Center(
+              child: pc.partyCard,
+            ),
             const Expanded(
               // flex: 10,
               child: PartyCommentForm()
