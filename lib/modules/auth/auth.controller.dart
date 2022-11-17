@@ -25,16 +25,10 @@ class AuthenticationController extends GetxController {
   }
 
   Future<void> signUp(String name, String email, String password) async {
-    final user = await _authenticationService.singUpCredentials(
-      name, email, password);
+    final user =
+        await _authenticationService.singUpCredentials(name, email, password);
     _authenticationStateStream.value = Authenticated(user: user);
     setupLoggedUserLocator(user);
-  }
-
-  Future<void> signUp(String name, String email, String password) async {
-    final user = await _authenticationService.singUpCredentials(
-      name, email, password);
-    _authenticationStateStream.value = Authenticated(user: user);
   }
 
   void signOut() async {
