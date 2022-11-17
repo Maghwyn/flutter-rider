@@ -1,3 +1,4 @@
+import 'package:flutter_project/config/service_locator.dart';
 import 'package:flutter_project/modules/auth/auth.service.dart';
 import 'package:flutter_project/modules/auth/auth.state.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,14 @@ class AuthenticationController extends GetxController {
     final user = await _authenticationService.signInWithEmailAndPassword(
         email, password);
     _authenticationStateStream.value = Authenticated(user: user);
+    setupLoggedUserLocator(user);
+  }
+
+  Future<void> signUp(String name, String email, String password) async {
+    final user = await _authenticationService.singUpCredentials(
+      name, email, password);
+    _authenticationStateStream.value = Authenticated(user: user);
+    setupLoggedUserLocator(user);
   }
 
   Future<void> signUp(String name, String email, String password) async {
