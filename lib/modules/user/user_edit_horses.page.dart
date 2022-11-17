@@ -14,7 +14,12 @@ class UserHorsesEditPage extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('UserHorsesEdit'),
+            title: const Text(
+              'UserHorsesEdit',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           body: const UserHorsesForm(),
         );

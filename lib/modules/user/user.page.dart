@@ -16,7 +16,12 @@ class UserPage extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('UserPage'),
+            title: const Text(
+              'UserPage',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           endDrawer: Drawer(
             child: ListView(
@@ -24,28 +29,23 @@ class UserPage extends StatelessWidget {
               padding: EdgeInsets.zero,
               children: [
                 const UserAccountsDrawerHeader(
+                  decoration: BoxDecoration(color: Colors.purple),
                   accountName: Text(
                     "Name",
                     style: TextStyle(
-                      color: Colors.purple,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   accountEmail: Text(
                     "06 12 12 12 12",
                     style: TextStyle(
-                      color: Colors.purple,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   currentAccountPicture: CircleAvatar(
-                    backgroundColor: Colors.purple,
-                  ),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        "https://appmaking.co/wp-content/uploads/2021/08/android-drawer-bg.jpeg",
-                      ),
-                      fit: BoxFit.fill,
-                    ),
+                    backgroundColor: Colors.white,
                   ),
                 ),
                 ListTile(
