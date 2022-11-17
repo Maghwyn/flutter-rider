@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/layout/app/app.layout.controller.dart';
 import 'package:flutter_project/models/user.dart';
+import 'package:flutter_project/modules/courses/courses.page.dart';
 import 'package:flutter_project/modules/placeholder/page.dart';
 import 'package:flutter_project/modules/user/user.profile.dart';
 import 'package:get/get.dart';
@@ -22,18 +23,29 @@ class AppLayout extends StatelessWidget {
               children: const [
                 PlaceholderPage(),
                 PlaceholderPage(),
+                CoursesPage(),
+                PlaceholderPage(),
                 UserPage(),
               ],
             ),
           ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: controller.tabIndex,
+            type: BottomNavigationBarType.fixed,
             selectedItemColor: Colors.purple,
             onTap: controller.changeTabIndex,
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.auto_graph_outlined),
                 label: 'Flux',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.privacy_tip),
+                label: 'Smaple 2',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.menu_book_sharp),
+                label: 'Courses',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.hourglass_empty),
