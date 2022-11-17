@@ -86,6 +86,14 @@ class __SignUpFormState extends State<_SignUpForm> {
   dynamic _textFormField(CustomTextField textField) {
     return TextFormField(
       decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.purple, width: 1),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.purple, width: 1),
+          borderRadius: BorderRadius.circular(10),
+        ),
         labelText: textField.labelText,
         hintText: textField.hintText,
         filled: true,

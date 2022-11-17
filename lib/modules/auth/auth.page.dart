@@ -7,11 +7,8 @@ class AuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Authentification'),
-      ),
-      body: const SafeArea(
+    return const Scaffold(
+      body: SafeArea(
         minimum: EdgeInsets.all(16),
         child: _AuthSwitch(),
       ),
