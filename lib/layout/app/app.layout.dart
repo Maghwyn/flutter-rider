@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/layout/app/app.layout.controller.dart';
 import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/modules/courses/courses.page.dart';
+import 'package:flutter_project/modules/flux/flux.page.dart';
 import 'package:flutter_project/modules/parties/parties.page.dart';
 import 'package:flutter_project/modules/placeholder/page.dart';
 import 'package:flutter_project/modules/user/user.page.dart';
@@ -20,7 +21,7 @@ class AppLayout extends StatelessWidget {
             child: IndexedStack(
               index: controller.tabIndex,
               children: const [
-                PlaceholderPage(),
+                FluxPage(),
                 PlaceholderPage(),
                 CoursesPage(),
                 PartiesPage(),
