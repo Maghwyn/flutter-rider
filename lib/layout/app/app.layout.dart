@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/layout/app/app.layout.controller.dart';
 import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/modules/courses/courses.page.dart';
+import 'package:flutter_project/modules/party/parties.page.dart';
 import 'package:flutter_project/modules/placeholder/page.dart';
 import 'package:flutter_project/modules/user/user.page.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class AppLayout extends StatelessWidget {
                 PlaceholderPage(),
                 PlaceholderPage(),
                 CoursesPage(),
-                PlaceholderPage(),
+                PartiesPage(),
                 UserPage(),
               ],
             ),
@@ -38,16 +39,16 @@ class AppLayout extends StatelessWidget {
                 label: 'Flux',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.privacy_tip),
-                label: 'Smaple 2',
+                icon: Icon(Icons.sports_score_sharp),
+                label: 'Competition',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.menu_book_sharp),
                 label: 'Courses',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.hourglass_empty),
-                label: 'Chevaux',
+                icon: Icon(Icons.sports_bar_sharp),
+                label: 'Parties',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
