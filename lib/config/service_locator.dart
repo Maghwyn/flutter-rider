@@ -11,3 +11,9 @@ setupDatabaseLocator(DBConnection mongodb) {
 setupLoggedUserLocator(User user) {
   inject.registerSingleton<User>(user);
 }
+
+unregisterLoggedUserLocator() {
+  if (inject.isRegistered<User>()) {
+    inject.unregister<User>();
+  }
+}
