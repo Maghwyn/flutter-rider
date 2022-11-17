@@ -1,77 +1,79 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/modules/user/user.controller.dart';
 import 'package:flutter_project/modules/user/user_edit.page.dart';
 import 'package:flutter_project/modules/user/user.profile.dart';
 import 'package:flutter_project/modules/user/user_edit_horses.page.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
-
-import '../../layout/app/app.layout.controller.dart';
+import 'package:get/get.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AppLayoutController>(
-      init: AppLayoutController(),
-      builder: (controller) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              'UserPage',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+    UserController uc = Get.put(UserController());
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'UserPage',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: Colors.purple),
+              accountName: Text(
+                "Name",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              accountEmail: Text(
+                "06 12 12 12 12",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
               ),
             ),
-          ),
-          endDrawer: Drawer(
-            child: ListView(
-              // Important: Remove any padding from the ListView.
-              padding: EdgeInsets.zero,
-              children: [
-                const UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(color: Colors.purple),
-                  accountName: Text(
-                    "Name",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  accountEmail: Text(
-                    "06 12 12 12 12",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  currentAccountPicture: CircleAvatar(
-                    backgroundColor: Colors.white,
-                  ),
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.edit,
-                  ),
-                  title: const Text('Edit Account'),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const UserEditPage(),
-                  )),
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.edit_note,
-                  ),
-                  title: const Text('Edit Horses'),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const UserHorsesEditPage(),
-                  )),
-                ),
-              ],
+            ListTile(
+              leading: const Icon(
+                Icons.edit,
+              ),
+              title: const Text('Edit Account'),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const UserEditPage(),
+              )),
             ),
-          ),
-          body: const UserProfile(),
-        );
-      },
+            ListTile(
+              leading: const Icon(
+                Icons.edit_note,
+              ),
+              title: const Text('Edit Horses'),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const UserHorsesEditPage(),
+              )),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.logout,
+              ),
+              title: const Text('Logout'),
+              onTap: () => uc.signOut(),
+            ),
+          ],
+        ),
+      ),
+      body: const UserProfile(),
     );
   }
 }
