@@ -1,4 +1,5 @@
 import 'package:flutter_project/modules/auth/auth.page.dart';
+import 'package:flutter_project/modules/home/page.dart';
 import 'package:flutter_project/modules/placeholder/page.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class AuthLayout extends StatelessWidget {
             child: IndexedStack(
               index: controller.tabIndex,
               children: const [
-                PlaceholderPage(),
+                HomePage(),
                 AuthPage(),
               ],
             ),

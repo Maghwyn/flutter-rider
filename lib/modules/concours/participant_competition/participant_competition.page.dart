@@ -43,28 +43,28 @@ class __CompetitionParticipationForm extends State<_CompetitionParticipationForm
           runSpacing: 18,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: <Widget>[
-            DropdownButtonFormField(
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.purple, width: 1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.purple, width: 1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                filled: true,
-                labelText: "Categorie",
-              ),
-              dropdownColor: Colors.purple[100],
-              value: _categorieController,
-              onChanged: (String? newValue) {
-                setState(() {
-                  _categorieController = newValue!;
-                });
-              },
-              items: competitionParticipantItems,
-            ),
+            // DropdownButtonFormField(
+            //   decoration: InputDecoration(
+            //     enabledBorder: OutlineInputBorder(
+            //       borderSide: const BorderSide(color: Colors.purple, width: 1),
+            //       borderRadius: BorderRadius.circular(10),
+            //     ),
+            //     border: OutlineInputBorder(
+            //       borderSide: const BorderSide(color: Colors.purple, width: 1),
+            //       borderRadius: BorderRadius.circular(10),
+            //     ),
+            //     filled: true,
+            //     labelText: "Categorie",
+            //   ),
+            //   dropdownColor: Colors.purple[100],
+            //   value: _categorieController,
+            //   onChanged: (String? newValue) {
+            //     setState(() {
+            //       _categorieController = newValue!;
+            //     });
+            //   },
+            //   items: competitionParticipantItems,
+            // ),
             ElevatedButton(
               onPressed: () => _onCommentButtonPressed(),
               child: const Text('Participate'),
@@ -78,9 +78,9 @@ class __CompetitionParticipationForm extends State<_CompetitionParticipationForm
   _onCommentButtonPressed() {
     if (_key.currentState!.validate()) {
       print("test");
-      _controller.addCompetitionParticipant(CompetitionParticipant(
-        categorie: _categorieController,
-      ), _controller.competitionId);
+      // _controller.addCompetitionParticipant(CompetitionParticipant(
+      //   categorie: _categorieController,
+      // ), _controller.competitionId);
     } else {
       setState(() {
         _autoValidate = true;
