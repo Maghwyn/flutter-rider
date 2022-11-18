@@ -1,4 +1,4 @@
-import 'package:mongo_dart/mongo_dart.dart' show DbCollection, ObjectId, WriteResult;
+import 'package:mongo_dart/mongo_dart.dart' show DbCollection, ModifierBuilder, ObjectId, WriteResult, where;
 import 'package:get/get.dart';
 
 import 'package:flutter_project/config/mongo.dart';
@@ -10,6 +10,8 @@ abstract class AuthenticationServiceTemplate extends GetxService {
   Future<User?> getCurrentUser();
   Future<User> signInWithEmailAndPassword(String email, String password);
   Future<User> singUpCredentials(String name, String email, String password);
+  Future<void> verifyEmail(String email);
+  Future<void> resetPassword(String password, String email);
   Future<void> signOut();
 }
 
@@ -44,6 +46,26 @@ class AuthenticationService extends AuthenticationServiceTemplate {
       role: user["role"] as List<dynamic>,
       number: user["number"],
       age: user["age"],
+    );
+  }
+
+  @override
+  Future<void> verifyEmail(String email) async {
+    Map<String, dynamic>? userExist = await _users.findOne({
+      "email": email,
+    });
+
+    if(userExist == null) {
+      throw AuthenticationException(message: 'Email does not exist');
+    }
+  }
+
+  @override
+  Future<void> resetPassword(String password, String email) async {
+    await _users.updateOne(
+      where.eq("email", email),
+      ModifierBuilder()
+        .set("password", password)
     );
   }
 
