@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/models/competition.dart';
 import 'package:flutter_project/models/participant_competition.dart';
+import 'package:flutter_project/modules/concours/participant_competition/participant_competition.card.dart';
 import 'package:flutter_project/modules/concours/competition.card.dart';
 import 'package:flutter_project/modules/concours/competition.service.dart';
 import 'package:flutter_project/modules/concours/competition.state.dart';
@@ -10,6 +12,7 @@ import 'package:mongo_dart/mongo_dart.dart';
 class CompetitionsController  extends GetxController {
   final CompetitionsService _competitionsService;
   final _competitionsStateStream = CompetitionsState().obs;
+  final _singleCompetitionStateStream = CompetitionState().obs;
   final _competitionsStateFormStream = CompetitionFormState().obs;
   final _competitionParticipantsStateStream = CompetitionParticipantState().obs;
 
@@ -19,6 +22,7 @@ class CompetitionsController  extends GetxController {
 
   List<Widget> get competitions => _competitionsStateStream.value.competitions.map((competition) =>
       CompetitionCard(
+        competition: competition,
         name: competition.name,
         date: competition.date,
         adress: competition.adress,
@@ -28,10 +32,15 @@ class CompetitionsController  extends GetxController {
   @override
   void onInit() {
     _getCompetitions();
+    _getCompetitionsParticipants(_singleCompetitionStateStream.value.competition.id!);
     super.onInit();
   }
 
-  /*ObjectId get competitionId => _competitionsStateStream.value.competitions.id!;*/
+  ObjectId get competitionId => _singleCompetitionStateStream.value.competition.id!;
+
+  void getSingleCompetition(Competition competition) {
+    _singleCompetitionStateStream.value = CompetitionState.fill(competition);
+  }
 
   void addCompetition(Competition competition) async {
     final mongoCompetition = await _competitionsService.addCompetition(competition);
@@ -46,6 +55,7 @@ class CompetitionsController  extends GetxController {
   }
 
   void addCompetitionParticipant(CompetitionParticipant cp, ObjectId competitionId) async {
+    print(competitionId);
     final mongoCompetitionParticipant = await _competitionsService.addCompetitionParticipant(cp, competitionId);
     _competitionParticipantsStateStream.value.addCompetitionParticipant(mongoCompetitionParticipant);
   }

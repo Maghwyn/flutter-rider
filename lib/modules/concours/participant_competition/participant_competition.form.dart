@@ -12,6 +12,7 @@ class CompetitionParticipationForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(),
         body: SafeArea(
           minimum: const EdgeInsets.all(16),
           child: _CompetitionParticipationForm(),
@@ -77,7 +78,7 @@ class __CompetitionParticipationForm extends State<_CompetitionParticipationForm
 
   _onCommentButtonPressed() {
     if (_key.currentState!.validate()) {
-      print("test");
+      print(_controller.competitionId);
       _controller.addCompetitionParticipant(CompetitionParticipant(
         categorie: _categorieController,
       ), _controller.competitionId);

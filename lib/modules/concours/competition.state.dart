@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_project/models/competition.dart';
 import 'package:flutter_project/models/participant_competition.dart';
 import 'package:get/get.dart';
+import 'package:mongo_dart/mongo_dart.dart';
 
 class CompetitionsState {
   late RxList<Competition> competitions = RxList<Competition>();
@@ -17,7 +18,18 @@ class CompetitionsState {
     competitions.remove(competition);
   }
 
+  removeById(ObjectId competitionId) {
+    competitions.removeWhere((element) => element.id == competitionId);
+  }
+
   List<Competition> get props => competitions;
+}
+
+class CompetitionState {
+  late Competition competition;
+  CompetitionState();
+  CompetitionState.fill(this.competition);
+  Competition get props => competition;
 }
 
 class CompetitionFormState extends Equatable {

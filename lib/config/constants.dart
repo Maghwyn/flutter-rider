@@ -26,3 +26,11 @@ List<DropdownMenuItem<String>> partyTypeItems = [
   const DropdownMenuItem(value: "1", child: Text("Pre-Dinner")),
   const DropdownMenuItem(value: "2", child: Text("Dinner")),
 ];
+
+List<DropdownMenuItem<String>> competitionParticipantItems = [
+  const DropdownMenuItem(value: "Amateur", child: Text("Amateur")),
+  const DropdownMenuItem(value: "Club1", child: Text("Club1")),
+  const DropdownMenuItem(value: "Club2", child: Text("Club2")),
+  const DropdownMenuItem(value: "Club3", child: Text("Club3")),
+  const DropdownMenuItem(value: "Club4", child: Text("Club4")),
+];
