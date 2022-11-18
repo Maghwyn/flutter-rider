@@ -14,11 +14,10 @@ class UserForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: SafeArea(
-        minimum: EdgeInsets.all(16),
-        child: _UserFormState(),
-      )
-    );
+        body: SafeArea(
+      minimum: EdgeInsets.all(16),
+      child: _UserFormState(),
+    ));
   }
 }
 
@@ -41,9 +40,9 @@ class __UserFormState extends State<_UserFormState> {
   bool _autoValidate = false;
 
   final User _user = inject<User>();
-  
+
   bool _lights = true;
-  
+
   @override
   Widget build(BuildContext context) {
     UserController uc = Get.put(UserController(Get.put(UserService())));
@@ -105,14 +104,14 @@ class __UserFormState extends State<_UserFormState> {
                 controller: _pictureController,
                 validatorType: "picture")),
             Obx(() => SwitchListTile(
-              title: const Text('Demi-Pensionnaire'),
-              value: uc.user.role[0] != "USER",
-              onChanged: (bool value) {
-                if(uc.user.role[0] != "ADMIN") {
-                  uc.setDpRole(value);
-                }
-              },
-            )),
+                  title: const Text('Demi-Pensionnaire'),
+                  value: uc.user.role[0] != "USER",
+                  onChanged: (bool value) {
+                    if (uc.user.role[0] != "ADMIN") {
+                      uc.setDpRole(value);
+                    }
+                  },
+                )),
             ElevatedButton(
               // onPressed: _editcontroller.stateForm is UserFormLoading
               //     ? () {}
@@ -120,16 +119,6 @@ class __UserFormState extends State<_UserFormState> {
               onPressed: _onEditButtonPressed,
               child: const Text('Edit'),
             ),
-            // if (_editcontroller.stateForm is UserFormFailure)
-            //   Text(
-            //     (_editcontroller.stateForm as UserFormFailure).error,
-            //     textAlign: TextAlign.center,
-            //     style: TextStyle(color: Get.theme.errorColor),
-            //   ),
-            // if (_editcontroller.stateForm is UserFormLoading)
-            //   const Center(
-            //     child: CircularProgressIndicator(),
-            //   )
           ],
         ),
       ),
