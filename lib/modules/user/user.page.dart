@@ -5,7 +5,6 @@ import 'package:flutter_project/modules/user/user.controller.dart';
 import 'package:flutter_project/modules/user/user.service.dart';
 import 'package:flutter_project/modules/user/user_edit/user_edit.page.dart';
 import 'package:flutter_project/modules/user/user.profile.dart';
-import 'package:flutter_project/modules/user/user_horses_edit/users_horses.form.dart';
 import 'package:get/get.dart';
 
 class UserPage extends StatelessWidget {
@@ -74,27 +73,9 @@ class UserPage extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(
-                Icons.edit_note,
-              ),
-              title: const Text('Edit Horses'),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const UserHorsesForm(),
-              )),
-            ),
-            if(uc.user.role[0] == "ADMIN") (
-              ListTile(
-                leading: const Icon(
-                  Icons.checklist_rtl_outlined,
-                ),
-                title: const Text('Validate Events'),
-                onTap: () => Get.to(const AdminValidatorPage()),
-              )
-            ),
-            ListTile(
-              leading: const Icon(
                 Icons.list,
               ),
-              title: const Text('Create Horses'),
+              title: const Text('Manage Horses'),
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const HorsesPage(),
               )),
