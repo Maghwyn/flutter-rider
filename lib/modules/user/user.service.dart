@@ -11,6 +11,8 @@ abstract class UserServiceTemplate extends GetxService {
   Future<User> _getUser();
   Future<User> updateUsers(User user);
   Future<User> setDpRole(bool x);
+  Future<RxList<User>> getUsers();
+  Future<void> deleteUser(ObjectId userId);
 }
 
 class UserService extends UserServiceTemplate {
@@ -31,6 +33,29 @@ class UserService extends UserServiceTemplate {
       number: user["number"],
       age: user["age"],
     );
+  }
+
+  @override
+  Future<RxList<User>> getUsers() async {
+    final usersList = await _users.find().toList();
+    late RxList<User> users = RxList<User>();
+
+    for(var n = 0; n < usersList.length; n++) {
+      var user = usersList[n];
+
+      users.add(User(
+        id: user["_id"],
+        name: user["name"],
+        email: user["email"],
+        createdAt: user["createdAt"],
+        picture: user["picture"] as String,
+        role: user["role"] as List<dynamic>,
+        number: user["number"],
+        age: user["age"],
+      ));
+    }
+
+    return users;
   }
 
   @override
@@ -57,5 +82,15 @@ class UserService extends UserServiceTemplate {
     );
 
     return await _getUser();
+  }
+  
+  @override
+  Future<void> deleteUser(ObjectId userId) async {
+    await _users.deleteOne({"_id": userId});
+    await _users.updateMany(
+      {"userId": userId}, 
+      ModifierBuilder()
+        .set("userId", null),
+    );
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_project/modules/user/user.controller.dart';
 import 'package:flutter_project/modules/user/user.service.dart';
 import 'package:flutter_project/modules/user/user_edit/user_edit.page.dart';
 import 'package:flutter_project/modules/user/user.profile.dart';
+import 'package:flutter_project/modules/user/user_remove/user_list.page.dart';
 import 'package:get/get.dart';
 
 class UserPage extends StatelessWidget {
@@ -79,6 +80,15 @@ class UserPage extends StatelessWidget {
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const HorsesPage(),
               )),
+            ),
+            if(uc.user.role[0] == "ADMIN") (
+              ListTile(
+                leading: const Icon(
+                  Icons.list,
+                ),
+                title: const Text('Manage Users'),
+                onTap: () => Get.to(const UserListPage()),
+              )
             ),
             if(uc.user.role[0] == "ADMIN") (
               ListTile(

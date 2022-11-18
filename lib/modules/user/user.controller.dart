@@ -1,12 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_project/config/service_locator.dart';
 import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/modules/auth/auth.controller.dart';
 import 'package:flutter_project/modules/user/user.service.dart';
 import 'package:flutter_project/modules/user/user.state.dart';
+import 'package:flutter_project/modules/user/user_remove/user_card.dart';
 import 'package:get/get.dart';
+import 'package:mongo_dart/mongo_dart.dart';
 
 class UserController extends GetxController {
   final _userStateStream = UserState().obs;
+  final _usersListStateStream = UsersListState().obs;
 
   final User _user = inject<User>();
 
@@ -16,11 +20,21 @@ class UserController extends GetxController {
 
   UserController(this._userService);
 
+  List<Widget> get usersList => _usersListStateStream.value.users.map((user) =>
+    UserCard(
+      id: user.id!,
+      name: user.name,
+      email: user.email,
+      createdAt: user.createdAt,
+      picture: user.picture,
+    )
+  ).toList();
+
   User get user => _userStateStream.value.user;
 
   @override
   void onInit() {
-    _getUser();
+    _getUsers();
     super.onInit();
   }
 
@@ -28,8 +42,15 @@ class UserController extends GetxController {
     _authenticationController.signOut();
   }
 
-  void _getUser() {
+  void deleteUser(ObjectId userId) async {
+    await _userService.deleteUser(userId);
+    _usersListStateStream.value.deleteUser(userId);
+  }
+
+  Future<void> _getUsers() async {
+    RxList<User> userList = await _userService.getUsers();
     _userStateStream.value = UserState.fill(_user);
+    _usersListStateStream.value = UsersListState.fill(userList);
   }
   
   @override
