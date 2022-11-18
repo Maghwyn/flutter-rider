@@ -4,46 +4,47 @@ import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_project/config/constants.dart';
-import 'package:flutter_project/modules/courses/courses.state.dart';
+import 'package:flutter_project/models/competition.dart';
+import 'package:flutter_project/modules/concours/competition.controller.dart';
+import 'package:flutter_project/modules/concours/competition.service.dart';
+import 'package:flutter_project/modules/concours/competition.state.dart';
 import 'package:flutter_project/utils/time_format.dart';
-import 'package:flutter_project/models/party.dart';
-import 'package:flutter_project/modules/parties/parties.controller.dart';
-import 'package:flutter_project/modules/parties/parties.service.dart';
 
-class PartyForm extends StatelessWidget {
-  const PartyForm({super.key});
+class CompetitionForm extends StatelessWidget {
+  const CompetitionForm({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.black,
+        appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: Colors.black,
+          ),
         ),
-      ),
-      body: SafeArea(
-        minimum: const EdgeInsets.all(16),
-        child: _PartyForm(),
-      )
+        body: SafeArea(
+          minimum: const EdgeInsets.all(16),
+          child: _CompetitionForm(),
+        )
     );
   }
 }
 
-class _PartyForm extends StatefulWidget {
+class _CompetitionForm extends StatefulWidget {
   @override
-  __PartyFormState createState() => __PartyFormState();
+  __CompetitionFormState createState() => __CompetitionFormState();
 }
 
-class __PartyFormState extends State<_PartyForm> {
-  final _controller = Get.put(PartiesController(Get.put(PartiesService())));
+class __CompetitionFormState extends State<_CompetitionForm> {
+  final _controller = Get.put(CompetitionsController(Get.put(CompetitionsService())));
 
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
   final _dateController = TextEditingController();
   final _timeController = TextEditingController();
-  final _titleController = TextEditingController();
+  final _adressController = TextEditingController();
+  final _pictureController = TextEditingController();
   bool _autoValidate = false;
 
-  String _typeController = "1";
 
   static final DateTime _firstDate = DateTime.now();
   final DateTime _lastDate = DateTime(_firstDate.year, _firstDate.month + 3, _firstDate.day);
@@ -53,7 +54,7 @@ class __PartyFormState extends State<_PartyForm> {
     return Form(
       key: _key,
       autovalidateMode:
-        _autoValidate ? AutovalidateMode.always : AutovalidateMode.disabled,
+      _autoValidate ? AutovalidateMode.always : AutovalidateMode.disabled,
       child: SingleChildScrollView(
         child: Wrap(
           runSpacing: 18,
@@ -61,6 +62,8 @@ class __PartyFormState extends State<_PartyForm> {
           children: <Widget>[
 
             TextFormField(
+              controller: _nameController,
+              keyboardType: const TextInputType.numberWithOptions(decimal: false),
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.purple, width: 1),
@@ -70,36 +73,10 @@ class __PartyFormState extends State<_PartyForm> {
                   borderSide: const BorderSide(color: Colors.purple, width: 1),
                   borderRadius: BorderRadius.circular(10),
                 ),
+                labelText: "Event name",
                 filled: true,
                 isDense: true,
-                labelText: "Title",
-                hintText: "Party to celebrate new newcomers"
               ),
-              keyboardType: TextInputType.text,
-              controller: _titleController,
-            ),
-
-            DropdownButtonFormField(
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.purple, width: 1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.purple, width: 1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                filled: true,
-                labelText: "Terrain",
-              ),
-              dropdownColor: Colors.purple[100],
-              value: _typeController,
-              onChanged: (String? newValue) {
-                setState(() {
-                  _typeController = newValue!;
-                });
-              },
-              items: partyTypeItems,
             ),
 
             TextFormField(
@@ -123,9 +100,9 @@ class __PartyFormState extends State<_PartyForm> {
 
                 DateTime? date = await showDatePicker(
                   context: context,
-                  initialDate: _dateController.text.isEmpty 
-                    ? DateTime.now()
-                    : DateTime.parse(_dateController.text),
+                  initialDate: _dateController.text.isEmpty
+                      ? DateTime.now()
+                      : DateTime.parse(_dateController.text),
                   firstDate: _firstDate,
                   lastDate: _lastDate,
                 );
@@ -161,19 +138,55 @@ class __PartyFormState extends State<_PartyForm> {
               ],
             ),
 
-            ElevatedButton(
-              onPressed: _controller.stateForm is CourseFormLoading
-                  ? () {}
-                  : _onPartyButtonPressed,
-              child: const Text('Create lesson'),
+            TextFormField(
+              controller: _adressController,
+              keyboardType: const TextInputType.numberWithOptions(decimal: false),
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.purple, width: 1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.purple, width: 1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                labelText: "Event adress",
+                filled: true,
+                isDense: true,
+              ),
             ),
-            if (_controller.stateForm is CourseFormFailure)
+
+            TextFormField(
+              controller: _pictureController,
+              keyboardType: const TextInputType.numberWithOptions(decimal: false),
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.purple, width: 1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.purple, width: 1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                labelText: "Event url picture",
+                filled: true,
+                isDense: true,
+              ),
+            ),
+
+            ElevatedButton(
+              onPressed: _controller.stateForm is CompetitionFormLoading
+                  ? () {}
+                  : _onCoursButtonPressed,
+              child: const Text('Create competition'),
+            ),
+            if (_controller.stateForm is CompetitionFormFailure)
               Text(
-                (_controller.stateForm as CourseFormFailure).error,
+                (_controller.stateForm as CompetitionFormFailure).error,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Get.theme.errorColor),
               ),
-            if (_controller.stateForm is CourseFormLoading)
+            if (_controller.stateForm is CompetitionFormLoading)
               const Center(
                 child: CircularProgressIndicator(),
               )
@@ -183,14 +196,13 @@ class __PartyFormState extends State<_PartyForm> {
     );
   }
 
-  _onPartyButtonPressed() {
+  _onCoursButtonPressed() {
     if (_key.currentState!.validate()) {
-      _controller.addParty(Party(
-        title: _titleController.text,
-        type: _typeController,
-        partipantsId: [],
+      _controller.addCompetition(Competition(
+        name: _nameController.text,
         date: DateTime.parse("${_dateController.text} ${_timeController.text}Z"),
-        status: "pending",
+        adress: _adressController.text,
+        picture: _pictureController.text,
       ));
     } else {
       setState(() {

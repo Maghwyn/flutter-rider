@@ -34,3 +34,18 @@ class CourseFormFailure extends CourseFormState {
   @override
   List<Object> get props => [error];
 }
+
+class CourseVisualState extends Equatable {
+  @override
+  List<Object> get props => [];
+}
+
+class CourseVisualToggle {
+  late bool checked;
+  CourseVisualToggle();
+  CourseVisualToggle.checked(this.checked);
+  bool get props => checked;
+}
+
+class CourseShowFinished extends CourseVisualState {}
+class CourseUnshowFinished extends CourseVisualState {}

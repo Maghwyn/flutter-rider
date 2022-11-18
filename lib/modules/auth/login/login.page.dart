@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/config/constants.dart';
 import 'package:flutter_project/models/text_field.custom.dart';
 import 'package:flutter_project/modules/auth/login/login.controller.dart';
 import 'package:flutter_project/modules/auth/login/login.state.dart';
+import 'package:flutter_project/modules/auth/login/widget/login_ask_email.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
@@ -54,22 +54,61 @@ class __SignInFormState extends State<_SignInForm> {
                 controller: _passwordController, 
                 validatorType: "password"
               )),
-              ElevatedButton(
-                onPressed: _controller.state is LoginLoading
-                    ? () {}
-                    : _onLoginButtonPressed,
-                child: const Text('LOG IN'),
-              ),
-              if (_controller.state is LoginFailure)
-                Text(
-                  (_controller.state as LoginFailure).error,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Get.theme.errorColor),
+
+              SizedBox(
+                width: double.infinity,
+                child: Wrap(
+                  direction: Axis.vertical,
+                  // runAlignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  spacing: 20,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 130.0),
+                      child: Wrap(
+                        runAlignment: WrapAlignment.center,
+                        alignment: WrapAlignment.center,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                         if (_controller.state is LoginFailure) (
+                            Text(
+                              (_controller.state as LoginFailure).error,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Get.theme.errorColor),
+                            )
+                          ),
+                          if (_controller.state is LoginLoading) (
+                            const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          ),
+                        ],
+                      )
+                    ),
+                    Wrap(
+                      runAlignment: WrapAlignment.spaceBetween,
+                      alignment: WrapAlignment.spaceBetween,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: 20,
+                      children: [
+                        ElevatedButton(
+                          onPressed: _controller.state is LoginLoading
+                              ? () {}
+                              : _onLoginButtonPressed,
+                          child: const Text('LOG IN'),
+                        ),
+                        InkWell(
+                          child: const Text(
+                            'Forgot your password ?',
+                            style: TextStyle(color: Color.fromARGB(255, 11, 74, 182),  decoration: TextDecoration.underline)
+                            ),
+                          onTap: () => { Get.to(const LoginVerifyEmail()) }
+                        )
+                      ],
+                    )
+                  ],
                 ),
-              if (_controller.state is LoginLoading)
-                const Center(
-                  child: CircularProgressIndicator(),
-                )
+              )
             ],
           ),
         ),

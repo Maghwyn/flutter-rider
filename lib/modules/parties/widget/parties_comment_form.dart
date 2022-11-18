@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/config/service_locator.dart';
 import 'package:flutter_project/models/party_participant.dart';
+import 'package:flutter_project/models/user.dart';
+import 'package:flutter_project/modules/admin/admin.controller.dart';
+import 'package:flutter_project/modules/admin/admin.service.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_project/modules/parties/parties.controller.dart';
@@ -26,7 +30,9 @@ class _PartyCommentForm extends StatefulWidget {
 
 class __PartyCommentForm extends State<_PartyCommentForm> {
   final _controller = Get.put(PartiesController(Get.put(PartiesService())));
+  final _ac = Get.put(AdminController(Get.put(AdminService())));
 
+  final User _user = inject<User>();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   final _commentController = TextEditingController();
   bool _autoValidate = false;
@@ -40,6 +46,7 @@ class __PartyCommentForm extends State<_PartyCommentForm> {
       child: SingleChildScrollView(
         child: Wrap(
           runSpacing: 18,
+          spacing: 20,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: <Widget>[
 
@@ -69,6 +76,25 @@ class __PartyCommentForm extends State<_PartyCommentForm> {
               onPressed: () => _onCommentButtonPressed(),
               child: const Text('Participate'),
             ),
+
+            const Padding(padding: EdgeInsets.all(22)),
+
+            if(_user.role[0] == "ADMIN" && _controller.party.status == "pending") (
+              ElevatedButton(
+                onPressed: () { _ac.validateParty(_controller.partyId, "accepted"); },
+                child: const Text('Accept'),
+              )
+            ),
+
+            if(_user.role[0] == "ADMIN" && _controller.party.status == "pending") (
+              ElevatedButton(
+                onPressed: () { _ac.validateParty(_controller.partyId, "rejected"); },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                ),
+                child: const Text('Reject'),
+              )
+            )
           ],
         ),
       ),

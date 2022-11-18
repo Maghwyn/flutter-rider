@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/modules/courses/courses.controller.dart';
-import 'package:flutter_project/modules/courses/courses.form.dart';
+import 'package:flutter_project/modules/courses/courses.state.dart';
+import 'package:flutter_project/modules/courses/widget/courses_form.dart';
 import 'package:flutter_project/modules/courses/courses.service.dart';
+import 'package:flutter_project/modules/user/user.controller.dart';
+import 'package:flutter_project/modules/user/user.service.dart';
 import 'package:get/get.dart';
 
 class CoursesPage extends StatelessWidget {
@@ -10,6 +13,7 @@ class CoursesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CoursesController cc = Get.put(CoursesController(Get.put(CoursesService())));
+    UserController uc = Get.put(UserController(Get.put(UserService())));
 
     return Scaffold(
       body: SafeArea(
@@ -17,12 +21,27 @@ class CoursesPage extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(
-                  onPressed: () { Get.to(const CourseForm()); },
-                  child: const Text('New Course'),
+                SizedBox(
+                  width: 225,
+                  child: Obx(() => SwitchListTile(
+                    value: cc.stateToggle is CourseShowFinished,
+                    title: const Text("Show finished", style: TextStyle(fontWeight: FontWeight.bold)),
+                    onChanged: (bool value) => cc.toggleVisibility(value),
+                  )),
                 ),
+                Obx(() => ElevatedButton(
+                  onPressed: () => uc.user.role[0] == "USER"
+                    ? null
+                    : Get.to(const CourseForm()),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: uc.user.role[0] == "USER"
+                      ? Colors.grey
+                      : Colors.purple
+                  ),
+                  child: const Text('New Course'),
+                )),
               ],
             ),
             Divider(

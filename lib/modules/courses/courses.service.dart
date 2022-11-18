@@ -39,6 +39,7 @@ class CoursesService extends CoursesServiceTemplate {
         createdAt: course["createdAt"],
         duration: course["duration"],
         speciality: course["speciality"],
+        status: course["status"],
       ));
     }
 
@@ -54,6 +55,7 @@ class CoursesService extends CoursesServiceTemplate {
       "createdAt": DateTime.now(),
       "duration": course.duration,
       "speciality": course.speciality,
+      "status": course.status,
     });
 
     final mongoCourse = mongoDocument.document;
@@ -65,6 +67,7 @@ class CoursesService extends CoursesServiceTemplate {
       createdAt: mongoCourse["createdAt"] as DateTime,
       duration: mongoCourse["duration"] as String,
       speciality: mongoCourse["speciality"] as String,
+      status: mongoCourse["status"] as String,
     );
   }
 

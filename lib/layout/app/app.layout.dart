@@ -4,6 +4,7 @@ import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/modules/courses/courses.page.dart';
 import 'package:flutter_project/modules/flux/flux.page.dart';
 import 'package:flutter_project/modules/parties/parties.page.dart';
+import 'package:flutter_project/modules/concours/competition.page.dart';
 import 'package:flutter_project/modules/placeholder/page.dart';
 import 'package:flutter_project/modules/user/user.page.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class AppLayout extends StatelessWidget {
               index: controller.tabIndex,
               children: const [
                 FluxPage(),
-                PlaceholderPage(),
+                CompetitionsPage(),
                 CoursesPage(),
                 PartiesPage(),
                 UserPage(),

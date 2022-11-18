@@ -10,8 +10,7 @@ import 'package:flutter_project/config/mongo.dart';
 abstract class UserServiceTemplate extends GetxService {
   Future<User> _getUser();
   Future<User> updateUsers(User user);
-
-  updateUser(User user) {}
+  Future<User> setDpRole(bool x);
 }
 
 class UserService extends UserServiceTemplate {
@@ -44,6 +43,17 @@ class UserService extends UserServiceTemplate {
         .set("number", user.number)
         .set("age", user.age)
         .set("picture", user.picture)
+    );
+
+    return await _getUser();
+  }
+  
+  @override
+  Future<User> setDpRole(bool x) async {
+    await _users.updateOne(
+      where.eq("_id", _user.id),
+      ModifierBuilder()
+        .set("role", x ? ["DP_CAVALIER"] : ["USER"])
     );
 
     return await _getUser();

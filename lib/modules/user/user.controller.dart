@@ -31,7 +31,31 @@ class UserController extends GetxController {
   void _getUser() {
     _userStateStream.value = UserState.fill(_user);
   }
+  
+  @override
+  void dispose() {
+    Get.delete<UserController>();
+    super.dispose();
+    Get.lazyPut(() => UserController(Get.put(UserService())));
+  }
 
+  Future<bool> reset() async {
+    _userStateStream.value = UserState();
+    return true;
+  }
+
+  Future<bool> set(User user) async {
+    _userStateStream.value = UserState.fill(user);
+    return true;
+  }
+
+  void setDpRole(bool x) async {
+    final mongoUser = await _userService.setDpRole(x);
+    unregisterLoggedUserLocator();
+    setupLoggedUserLocator(mongoUser);
+    _userStateStream.value = UserState.fill(mongoUser);
+  }
+  
   void updateUser(User user) async {
     final mongoUser = await _userService.updateUsers(user);
     unregisterLoggedUserLocator();

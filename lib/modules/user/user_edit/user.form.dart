@@ -41,9 +41,9 @@ class __UserFormState extends State<_UserFormState> {
   bool _autoValidate = false;
 
   final User _user = inject<User>();
-
+  
   bool _lights = true;
-
+  
   @override
   Widget build(BuildContext context) {
     UserController uc = Get.put(UserController(Get.put(UserService())));
@@ -104,15 +104,15 @@ class __UserFormState extends State<_UserFormState> {
                 hintText: "https://example.com/image.png",
                 controller: _pictureController,
                 validatorType: "picture")),
-            SwitchListTile(
+            Obx(() => SwitchListTile(
               title: const Text('Demi-Pensionnaire'),
-              value: _lights,
+              value: uc.user.role[0] != "USER",
               onChanged: (bool value) {
-                setState(() {
-                  _lights = value;
-                });
+                if(uc.user.role[0] != "ADMIN") {
+                  uc.setDpRole(value);
+                }
               },
-            ),
+            )),
             ElevatedButton(
               // onPressed: _editcontroller.stateForm is UserFormLoading
               //     ? () {}

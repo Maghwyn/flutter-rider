@@ -8,6 +8,7 @@ class Course {
   final DateTime? createdAt;
   final String duration;
   final String speciality;
+  final String status;
 
   Course({
     this.id,
@@ -17,5 +18,6 @@ class Course {
     this.createdAt,
     required this.duration,
     required this.speciality,
+    required this.status
   });
 }
