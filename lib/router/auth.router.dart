@@ -1,4 +1,5 @@
 import 'package:flutter_project/modules/auth/auth.page.dart';
+import 'package:flutter_project/modules/courses/widget/courses_form.dart';
 import 'package:flutter_project/modules/placeholder/page.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,13 @@ List<GetPage<dynamic>> authRoutes() => [
   GetPage(
     name: '/auth',
     page: () => const AuthPage(),
+    middlewares: [MyMiddelware()],
+    transition: Transition.leftToRightWithFade,
+    transitionDuration: const Duration(milliseconds: 500),
+  ),
+  GetPage(
+    name: '/test',
+    page: () => const CourseForm(),
     middlewares: [MyMiddelware()],
     transition: Transition.leftToRightWithFade,
     transitionDuration: const Duration(milliseconds: 500),

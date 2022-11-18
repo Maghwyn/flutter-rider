@@ -86,6 +86,14 @@ class __SignUpFormState extends State<_SignUpForm> {
   dynamic _textFormField(CustomTextField textField) {
     return TextFormField(
       decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.purple, width: 1),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.purple, width: 1),
+          borderRadius: BorderRadius.circular(10),
+        ),
         labelText: textField.labelText,
         hintText: textField.hintText,
         filled: true,
@@ -102,7 +110,7 @@ class __SignUpFormState extends State<_SignUpForm> {
 
   _onsignupButtonPressed() {
     if (_key.currentState!.validate()) {
-      _controller.signup(_emailController.text, _passwordController.text);
+      _controller.signup(_nameController.text, _emailController.text, _passwordController.text);
     } else {
       setState(() {
         _autoValidate = true;
