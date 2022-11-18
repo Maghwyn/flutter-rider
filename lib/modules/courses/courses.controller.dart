@@ -50,6 +50,32 @@ class CoursesController  extends GetxController {
     }
   }
 
+  Future<void> reset() async {
+    final RxList<Course> courses = RxList<Course>();
+    _coursStateStream.value = CoursesState.fill(courses);
+    _coursStateFormStream.value = CourseFormState();
+    _coursVisualStateStream.value = CourseVisualState();
+    Get.delete<CoursesController>();
+    Get.lazyPut(() => CoursesController(Get.put(CoursesService())));
+  }
+
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // }
+
+  Future<bool> set() async {
+    final coursesList = await _coursesService.getCourses();
+    _sortCourse();
+
+    if (coursesList.isEmpty) {
+      _coursStateStream.value = CoursesState();
+    } else {
+      _coursStateStream.value = CoursesState.fill(coursesList);
+    }
+    return true;
+  }
+
   void addCourse(Course course) async {
     final mongoCourse = await _coursesService.addCourse(course);
     _coursStateStream.value.addCourse(mongoCourse);
