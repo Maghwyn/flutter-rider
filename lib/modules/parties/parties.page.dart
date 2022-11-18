@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/modules/parties/widget/parties_form.dart';
+import 'package:flutter_project/modules/user/user.controller.dart';
+import 'package:flutter_project/modules/user/user.service.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_project/modules/parties/parties.controller.dart';
@@ -11,6 +13,7 @@ class PartiesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PartiesController pc = Get.put(PartiesController(Get.put(PartiesService())));
+    UserController uc = Get.put(UserController(Get.put(UserService())));
 
     return Scaffold(
       body: SafeArea(
@@ -20,10 +23,17 @@ class PartiesPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                ElevatedButton(
-                  onPressed: () { Get.to(const PartyForm()); },
+                Obx(() => ElevatedButton(
+                  onPressed: () => uc.user.role[0] == "USER"
+                    ? null
+                    : Get.to(const PartyForm()),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: uc.user.role[0] == "USER"
+                      ? Colors.grey
+                      : Colors.purple
+                  ),
                   child: const Text('New Party'),
-                ),
+                )),
               ],
             ),
             Divider(

@@ -94,6 +94,33 @@ class PartiesController  extends GetxController {
     _partyParticipantsStateStream.value.addPartyParticipant(mongoPartyParticipant);
   }
 
+  // @override
+  // void dispose() {
+  //   Get.delete<PartiesController>();
+  //   super.dispose();
+  // }
+  
+  Future<bool> reset() async {
+    _partiesStateStream.value = PartiesState();
+    _partyStateFormStream.value = PartyFormState();
+    _partyStateStream.value = PartyState();
+    _partyParticipantsStateStream .value= PartyParticipantState();
+    Get.delete<PartiesController>();
+    Get.lazyPut(() => PartiesController(Get.put(PartiesService())));
+    return true;
+  }
+
+  Future<bool> set() async {
+    final partiesList = await _partiesService.getParties();
+
+    if (partiesList.isEmpty) {
+      _partiesStateStream.value = PartiesState();
+    } else {
+      _partiesStateStream.value = PartiesState.fill(partiesList);
+    }
+    return true;
+  }
+
   void _getParties() async {
     final partiesList = await _partiesService.getParties();
 
