@@ -32,6 +32,13 @@ class UserController extends GetxController {
     _userStateStream.value = UserState.fill(_user);
   }
 
+  void setDpRole(bool x) async {
+    final mongoUser = await _userService.setDpRole(x);
+    unregisterLoggedUserLocator();
+    setupLoggedUserLocator(mongoUser);
+    _userStateStream.value = UserState.fill(mongoUser);
+  }
+
   void updateUser(User user) async {
     final mongoUser = await _userService.updateUsers(user);
     unregisterLoggedUserLocator();
