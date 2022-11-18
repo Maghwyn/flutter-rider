@@ -5,7 +5,6 @@ import 'package:flutter_project/models/text_field.custom.dart';
 import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/modules/user/user.controller.dart';
 import 'package:flutter_project/modules/user/user.service.dart';
-import 'package:flutter_project/modules/user/user_edit/user_edit.state.dart';
 import 'package:get/get.dart';
 
 class UserForm extends StatelessWidget {
@@ -41,8 +40,6 @@ class __UserFormState extends State<_UserFormState> {
   bool _autoValidate = false;
 
   final User _user = inject<User>();
-
-  bool _lights = true;
 
   @override
   Widget build(BuildContext context) {
@@ -104,15 +101,15 @@ class __UserFormState extends State<_UserFormState> {
                 hintText: "https://example.com/image.png",
                 controller: _pictureController,
                 validatorType: "picture")),
-            SwitchListTile(
+            Obx(() => SwitchListTile(
               title: const Text('Demi-Pensionnaire'),
-              value: _lights,
+              value: uc.user.role[0] != "USER",
               onChanged: (bool value) {
-                setState(() {
-                  _lights = value;
-                });
+                if(uc.user.role[0] != "ADMIN") {
+                  uc.setDpRole(value);
+                }
               },
-            ),
+            )),
             ElevatedButton(
               // onPressed: _editcontroller.stateForm is UserFormLoading
               //     ? () {}
