@@ -95,6 +95,15 @@ class HorsesController  extends GetxController {
     Get.back();
   }
 
+  void forceRefreshHorse() async {
+    final horsesList = await _horsesService.getHorses();
+
+    if (horsesList.isEmpty) {
+      _horseStateStream.value = HorsesState();
+    } else {
+      _horseStateStream.value = HorsesState.fill(horsesList);
+    }
+
   void _getHorses() async {
     final horsesList = await _horsesService.getHorses();
     // _sortCourse();

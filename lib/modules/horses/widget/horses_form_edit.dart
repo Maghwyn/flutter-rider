@@ -98,13 +98,15 @@ class __HorsesEditForm extends State<_HorsesEditForm> {
                 hintText: "sexe",
                 controller: _sexeController,
                 validatorType: "text")),
-            Obx(() => SwitchListTile(
-              title: const Text('Owner ?'),
-              value: _controller.horse.userId == uc.user.id ? true : false,
-              onChanged: (bool value) {
-                _controller.setMyHorse(value, horse.id!);
-              },
-            )),
+            if(_controller.horse.userId == null || _controller.horse.userId == uc.user.id) (
+              Obx(() => SwitchListTile(
+                title: const Text('Owner ?'),
+                value: _controller.horse.userId == uc.user.id ? true : false,
+                onChanged: (bool value) {
+                  _controller.setMyHorse(value, horse.id!);
+                },
+              ))
+            ),
             Wrap(
               spacing: 30,
               children: [
