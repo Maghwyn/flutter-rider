@@ -31,6 +31,14 @@ class AuthenticationController extends GetxController {
     setupLoggedUserLocator(user);
   }
 
+  Future<void> verifyEmail(String email) async {
+    await _authenticationService.verifyEmail(email);
+  }
+
+  Future<void> resetPassword(String password, String email) async {
+    await _authenticationService.resetPassword(password, email);
+  }
+
   void signOut() async {
     unregisterLoggedUserLocator();
     await _authenticationService.signOut();
