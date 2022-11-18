@@ -25,6 +25,7 @@ class CustomTextField {
     "age": (String? value) => _ageValidator(value),
     "phone": (String? value) => _phoneValidator(value),
     "picture": (String? value) => _pictureValidator(value),
+    "text": (String? value) => _textValidator(value),
   };
 
   static String? _emailValidator(String? value) {
@@ -36,8 +37,24 @@ class CustomTextField {
       return 'Email is required.';
     }
 
+    if (value.isEmpty) {
+      return 'Email is required.';
+    }
+
     if (emailFormat.hasMatch(value) == false) {
       return 'Email format is invalid';
+    }
+
+    return null;
+  }
+
+    static String? _textValidator(String? value) {
+    if (value == null) {
+      return 'Field is required.';
+    }
+
+    if (value.isEmpty) {
+      return 'Field is required.';
     }
 
     return null;

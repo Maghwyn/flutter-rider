@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/modules/concours/competition.controller.dart';
-import 'package:flutter_project/modules/concours/competition.service.dart';
+
 import 'package:flutter_project/modules/courses/courses.controller.dart';
 import 'package:flutter_project/modules/courses/courses.service.dart';
 import 'package:flutter_project/modules/parties/parties.controller.dart';
@@ -16,8 +15,6 @@ class FluxPage extends StatelessWidget {
         Get.put(PartiesController(Get.put(PartiesService())));
     CoursesController cc =
         Get.put(CoursesController(Get.put(CoursesService())));
-    CompetitionsController Cc =
-        Get.put(CompetitionsController(Get.put(CompetitionsService())));
 
     return Scaffold(
         body: SafeArea(
