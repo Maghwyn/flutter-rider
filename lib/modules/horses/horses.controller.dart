@@ -103,7 +103,6 @@ class HorsesController  extends GetxController {
     } else {
       _horseStateStream.value = HorsesState.fill(horsesList);
     }
-  }
 
   void _getHorses() async {
     final horsesList = await _horsesService.getHorses();
