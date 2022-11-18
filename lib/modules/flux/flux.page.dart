@@ -81,6 +81,32 @@ class FluxPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text("Last Competition",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold)),
+                    Icon(
+                      Icons.sports_score_sharp,
+                      color: Colors.purple,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text("Last Riders",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold)),
+                    Icon(
+                      Icons.rice_bowl_rounded,
+                      color: Colors.purple,
+                    ),
+                  ],
+                ),
               ],
             )));
   }
