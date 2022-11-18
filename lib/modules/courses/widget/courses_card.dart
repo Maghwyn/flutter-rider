@@ -69,7 +69,7 @@ class _CourseCard extends State<CourseCard> {
                     children: [
                       Wrap(
                         direction: Axis.vertical,
-                        spacing: 20,
+                        spacing: 10,
                         children: [
                           Text(widget.speciality,
                             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -78,6 +78,9 @@ class _CourseCard extends State<CourseCard> {
                             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                           ),
                           Text("- ${DateFormat("yyyy-MM-dd").format(widget.date)}",
+                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                          ),
+                          Text("- Status : ${widget.status}",
                             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                           ),
                         ],

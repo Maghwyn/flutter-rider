@@ -28,6 +28,7 @@ class PartiesController  extends GetxController {
       type: party.type,
       participants: party.partipantsId.length,
       isMine: _user.id == party.userId,
+      status: party.status,
       canOpen: true,
   )).toList();
 
@@ -39,6 +40,7 @@ class PartiesController  extends GetxController {
     type: _partyStateStream.value.party.type,
     participants: _partyStateStream.value.party.partipantsId.length,
     isMine: _user.id == _partyStateStream.value.party.userId,
+    status: _partyStateStream.value.party.status,
     canOpen: false,
   );
 
@@ -85,8 +87,8 @@ class PartiesController  extends GetxController {
       title: party.title,
       date: party.date,
       type: party.type,
-      createdAt: party.createdAt,
       status: party.status,
+      createdAt: party.createdAt,
     ));
   }
 
