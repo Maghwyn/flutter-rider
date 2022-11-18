@@ -6,23 +6,21 @@ import 'package:flutter_project/modules/horses/horses.controller.dart';
 import 'package:flutter_project/modules/horses/horses.service.dart';
 import 'package:get/get.dart';
 
-
 class UserHorsesForm extends StatelessWidget {
   const UserHorsesForm({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.black,
+        appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: Colors.black,
+          ),
         ),
-      ),
-      body: const SafeArea(
-        minimum: EdgeInsets.all(16),
-        child: _UserHorsesForm(),
-      )
-    );
+        body: const SafeArea(
+          minimum: EdgeInsets.all(16),
+          child: _UserHorsesForm(),
+        ));
   }
 }
 
@@ -97,6 +95,7 @@ class __UserHorsesForm extends State<_UserHorsesForm> {
       ),
     );
   }
+
   _onEditButtonPressed() {
     if (_key.currentState!.validate()) {
       _controller.editHorse(Horse(
@@ -118,7 +117,6 @@ class __UserHorsesForm extends State<_UserHorsesForm> {
 dynamic _textFormField(CustomTextField textField) {
   return TextFormField(
     decoration: InputDecoration(
-      enabledBorder: OutlineInputBorder(
       labelText: textField.labelText,
       hintText: textField.hintText,
       filled: true,
@@ -131,5 +129,4 @@ dynamic _textFormField(CustomTextField textField) {
     controller: textField.controller,
     validator: (value) => textField.getValidator(value),
   );
-}
 }

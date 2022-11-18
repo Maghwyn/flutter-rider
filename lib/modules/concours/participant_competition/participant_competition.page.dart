@@ -12,10 +12,9 @@ class CompetitionParticipationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          minimum: const EdgeInsets.all(16),
-          child: _CompetitionParticipationForm(),
-        )
-    );
+      minimum: const EdgeInsets.all(16),
+      child: _CompetitionParticipationForm(),
+    ));
   }
 }
 
@@ -29,34 +28,12 @@ class __CompetitionParticipationForm
     extends State<_CompetitionParticipationForm> {
   final _controller =
       Get.put(CompetitionsController(Get.put(CompetitionsService())));
-  __CompetitionParticipationForm createState() => __CompetitionParticipationForm();
-}
-
-class __CompetitionParticipationForm extends State<_CompetitionParticipationForm> {
-  final _controller = Get.put(CompetitionsController(Get.put(CompetitionsService())));
-
-  final GlobalKey<FormState> _key = GlobalKey<FormState>();
-  bool _autoValidate = false;
-  String _categorieController = "Amateur";
+  __CompetitionParticipationForm createState() =>
+      __CompetitionParticipationForm();
 
   @override
-  Widget build(BuildContext context) 
-    return const Text("rest");
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
   }
 }
-    );
-  }
-
-  _onCommentButtonPressed() {
-    if (_key.currentState!.validate()) {
-      print("test");
-      // _controller.addCompetitionParticipant(CompetitionParticipant(
-      //   categorie: _categorieController,
-      // ), _controller.competitionId);
-    } else {
-      setState(() {
-        _autoValidate = true;
-      });
-    }
-  }
- }
