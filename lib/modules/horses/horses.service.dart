@@ -9,9 +9,10 @@ import 'package:flutter_project/config/mongo.dart';
 abstract class HorsesServiceTemplate extends GetxService {
   Future<RxList<Horse>> getHorses();
   Future<Horse> addHorse(Horse horse);
-  Future<Horse> editHorse(Horse horse);
-  Future<bool> deleteHorse(Horse horse);
-  Future<Horse> _getHorse();
+  Future<RxList<Horse>> editHorse(Horse horse, ObjectId horseId);
+  Future<bool> deleteHorse(ObjectId horseId);
+  Future<Horse> setMyHorse(bool x, ObjectId horseId);
+  Future<Horse> _getHorse(ObjectId horseId);
 }
 
 class HorsesService extends HorsesServiceTemplate {
@@ -42,10 +43,19 @@ class HorsesService extends HorsesServiceTemplate {
     return horses;
   }
 
+  Future<Horse> setMyHorse(bool x, ObjectId horseId) async {
+    await _horses.updateOne(
+      { "_id": horseId},
+      ModifierBuilder()
+        .set("userId", x ? _user.id : null),
+    );
+
+    return await _getHorse(horseId);
+  }
+
   @override
   Future<Horse> addHorse(Horse horse) async {
     WriteResult mongoDocument = await _horses.insertOne({
-      "userId": _user.id,
       "name": horse.name,
       "age": horse.age,
       "createdAt": DateTime.now(),
@@ -57,8 +67,8 @@ class HorsesService extends HorsesServiceTemplate {
 
     final mongoHorse = mongoDocument.document;
     return Horse(
-      id: mongoDocument.id as ObjectId,
-      userId: mongoHorse!["userId"] as ObjectId,
+      id: mongoDocument.id as ObjectId?,
+      userId: mongoHorse!["userId"] as ObjectId?,
       name: mongoHorse["name"] as String,
       age: mongoHorse["age"] as String,
       robe: mongoHorse["robe"] as String,
@@ -69,23 +79,19 @@ class HorsesService extends HorsesServiceTemplate {
     );
   }
 
-  // 6377501716a74deeb121a2ed
-
   @override
-  Future<bool> deleteHorse(Horse horse) async {
-    // // TODO: implement deleteCourse
-    // throw UnimplementedError();
-
+  Future<bool> deleteHorse(ObjectId horseId) async {
+    await _horses.deleteOne({"_id": horseId});
     return true;
   }
 
   @override
-  Future<Horse> _getHorse() async {
-    final horse = await _horses.findOne({"_id": "6377501716a74deeb121a2ed"});
+  Future<Horse> _getHorse(ObjectId horseId) async {
+    final horse = await _horses.findOne({"_id": horseId});
 
     return Horse(
-      id: horse!["_id"] as ObjectId,
-      userId: horse["userId"] as ObjectId,
+      id: horse!["_id"] as ObjectId?,
+      userId: horse["userId"] as ObjectId?,
       name: horse["name"] as String,
       age: horse["age"] as String,
       robe: horse["robe"] as String,
@@ -97,9 +103,9 @@ class HorsesService extends HorsesServiceTemplate {
   }
 
   @override
-  Future<Horse> editHorse(Horse horse) async {
+  Future<RxList<Horse>> editHorse(Horse horse, ObjectId horseId) async {
     await _horses.updateOne(
-      where.eq("_id", _user.id),
+      where.eq("_id", horseId),
       ModifierBuilder()
         .set("name", horse.name)
         .set("picture", horse.picture)
@@ -109,6 +115,6 @@ class HorsesService extends HorsesServiceTemplate {
         .set("sexe", horse.sexe)
     );
 
-    return await _getHorse();
+    return await getHorses();
   }
 }
