@@ -6,6 +6,8 @@ import 'package:flutter_project/modules/courses/courses.controller.dart';
 import 'package:flutter_project/modules/courses/courses.service.dart';
 import 'package:flutter_project/modules/parties/parties.controller.dart';
 import 'package:flutter_project/modules/parties/parties.service.dart';
+import 'package:flutter_project/modules/user/user.controller.dart';
+import 'package:flutter_project/modules/user/user.service.dart';
 import 'package:get/get.dart';
 
 class FluxPage extends StatelessWidget {
@@ -13,6 +15,8 @@ class FluxPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserController uc = Get.put(UserController(Get.put(UserService())));
+
     PartiesController pc =
         Get.put(PartiesController(Get.put(PartiesService())));
     CoursesController cc =
@@ -120,6 +124,15 @@ class FluxPage extends StatelessWidget {
                       color: Colors.purple,
                     ),
                   ],
+                ),
+                Text(uc.user.name),
+                Expanded(
+                  flex: 10,
+                  child: Obx(
+                    () => ListView(
+                      children: Cc.competitions,
+                    ),
+                  ),
                 ),
               ],
             )));
