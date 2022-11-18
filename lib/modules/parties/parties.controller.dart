@@ -98,12 +98,6 @@ class PartiesController  extends GetxController {
   void _sortParty() {
     _partiesStateStream.value.parties.sort((a,b) => -b.date.compareTo(a.date));
   }
-
-  // @override
-  // void dispose() {
-  //   Get.delete<PartiesController>();
-  //   super.dispose();
-  // }
   
   Future<bool> reset() async {
     _partiesStateStream.value = PartiesState();
