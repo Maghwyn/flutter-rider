@@ -76,6 +76,7 @@ class HorsesController  extends GetxController {
     // _sortCourse();
     Get.back();
   }
+
   void setMyHorse(bool x, ObjectId horseId) async {
     Horse horseUpdate = await _horsesService.setMyHorse(x, horseId);
      _singleHorseStateStream.value = SingleHorseState.fill(horseUpdate);
@@ -103,6 +104,7 @@ class HorsesController  extends GetxController {
     } else {
       _horseStateStream.value = HorsesState.fill(horsesList);
     }
+  }
 
   void _getHorses() async {
     final horsesList = await _horsesService.getHorses();
