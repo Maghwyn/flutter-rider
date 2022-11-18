@@ -97,7 +97,6 @@ class __UserHorsesForm extends State<_UserHorsesForm> {
       ),
     );
   }
-
   _onEditButtonPressed() {
     if (_key.currentState!.validate()) {
       _controller.editHorse(Horse(
@@ -120,13 +119,6 @@ dynamic _textFormField(CustomTextField textField) {
   return TextFormField(
     decoration: InputDecoration(
       enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: Colors.purple, width: 1),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      border: OutlineInputBorder(
-        borderSide: const BorderSide(color: Colors.purple, width: 1),
-        borderRadius: BorderRadius.circular(10),
-      ),
       labelText: textField.labelText,
       hintText: textField.hintText,
       filled: true,
@@ -139,4 +131,5 @@ dynamic _textFormField(CustomTextField textField) {
     controller: textField.controller,
     validator: (value) => textField.getValidator(value),
   );
+}
 }

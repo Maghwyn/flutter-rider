@@ -81,6 +81,15 @@ class UserPage extends StatelessWidget {
                 builder: (context) => const UserHorsesForm(),
               )),
             ),
+            if(uc.user.role[0] == "ADMIN") (
+              ListTile(
+                leading: const Icon(
+                  Icons.checklist_rtl_outlined,
+                ),
+                title: const Text('Validate Events'),
+                onTap: () => Get.to(const AdminValidatorPage()),
+              )
+            ),
             ListTile(
               leading: const Icon(
                 Icons.list,
