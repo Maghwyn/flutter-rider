@@ -7,12 +7,12 @@ class User {
   final DateTime createdAt;
   final List<dynamic> role;
   final String picture;
-  final int? number;
-  final int? age;
+  final String? number;
+  final String? age;
 
   User({
     this.id,
-    required this.name, 
+    required this.name,
     required this.email,
     required this.createdAt,
     required this.role,
@@ -22,5 +22,6 @@ class User {
   });
 
   @override
-  String toString() => 'User { name: $name, email: $email}';
+  String toString() =>
+      'User { name: $name, email: $email, id: $id, createAt: $createdAt, role: $role, picture:$picture, number:$number, age:$age}';
 }
