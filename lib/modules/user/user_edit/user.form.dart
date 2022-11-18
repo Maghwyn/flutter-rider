@@ -5,6 +5,7 @@ import 'package:flutter_project/models/text_field.custom.dart';
 import 'package:flutter_project/models/user.dart';
 import 'package:flutter_project/modules/user/user.controller.dart';
 import 'package:flutter_project/modules/user/user.service.dart';
+import 'package:flutter_project/modules/user/user_edit/user_edit.state.dart';
 import 'package:get/get.dart';
 
 class UserForm extends StatelessWidget {
@@ -40,7 +41,9 @@ class __UserFormState extends State<_UserFormState> {
   bool _autoValidate = false;
 
   final User _user = inject<User>();
-
+  
+  bool _lights = true;
+  
   @override
   Widget build(BuildContext context) {
     UserController uc = Get.put(UserController(Get.put(UserService())));

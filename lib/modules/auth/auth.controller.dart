@@ -53,7 +53,7 @@ class AuthenticationController extends GetxController {
   }
 
   void signOut() async {
-    // unregisterLoggedUserLocator();
+    unregisterLoggedUserLocator();
     await _authenticationService.signOut();
     _authenticationStateStream.value = UnAuthenticated();
     await _userController.reset();

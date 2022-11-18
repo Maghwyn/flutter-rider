@@ -1,7 +1,8 @@
 import 'package:flutter_project/config/service_locator.dart';
+import 'package:flutter_project/models/course.dart';
 import 'package:flutter_project/models/user.dart';
 import 'package:mongo_dart/mongo_dart.dart'
-    show DbCollection, ModifierBuilder, where;
+    show DbCollection, ModifierBuilder, ObjectId, WriteResult, where;
 import 'package:get/get.dart';
 
 import 'package:flutter_project/config/mongo.dart';
@@ -10,7 +11,6 @@ abstract class UserServiceTemplate extends GetxService {
   Future<User> _getUser();
   Future<User> updateUsers(User user);
   Future<User> setDpRole(bool x);
-  updateUser(User user) {}
 }
 
 class UserService extends UserServiceTemplate {
@@ -47,7 +47,7 @@ class UserService extends UserServiceTemplate {
 
     return await _getUser();
   }
-
+  
   @override
   Future<User> setDpRole(bool x) async {
     await _users.updateOne(
