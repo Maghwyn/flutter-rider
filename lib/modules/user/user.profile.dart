@@ -52,14 +52,6 @@ class UserProfile extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  Text(
-                    "Rôle : ${uc.user.role}",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
                   if (uc.user.age.toString() == "null")
                     (const Text(
                       "Age : Âge non encore renseigné",
