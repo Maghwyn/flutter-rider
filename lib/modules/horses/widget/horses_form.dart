@@ -6,9 +6,8 @@ import 'package:flutter_project/modules/horses/horses.controller.dart';
 import 'package:flutter_project/modules/horses/horses.service.dart';
 import 'package:get/get.dart';
 
-
-class UserHorsesForm extends StatelessWidget {
-  const UserHorsesForm({super.key});
+class HorsesForm extends StatelessWidget {
+  const HorsesForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +19,20 @@ class UserHorsesForm extends StatelessWidget {
       ),
       body: const SafeArea(
         minimum: EdgeInsets.all(16),
-        child: _UserHorsesForm(),
+        child: _HorsesForm(),
       )
     );
   }
 }
 
-class _UserHorsesForm extends StatefulWidget {
-  const _UserHorsesForm({super.key});
+class _HorsesForm extends StatefulWidget {
+  const _HorsesForm({super.key});
 
   @override
-  State<_UserHorsesForm> createState() => __UserHorsesForm();
+  State<_HorsesForm> createState() => __HorsesForm();
 }
 
-class __UserHorsesForm extends State<_UserHorsesForm> {
+class __HorsesForm extends State<_HorsesForm> {
   final _controller = Get.put(HorsesController(Get.put(HorsesService())));
 
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
@@ -90,7 +89,7 @@ class __UserHorsesForm extends State<_UserHorsesForm> {
                 validatorType: "text")),
             ElevatedButton(
               onPressed: _onEditButtonPressed,
-              child: const Text('Edit'),
+              child: const Text('Create'),
             ),
           ],
         ),
@@ -100,7 +99,7 @@ class __UserHorsesForm extends State<_UserHorsesForm> {
 
   _onEditButtonPressed() {
     if (_key.currentState!.validate()) {
-      _controller.editHorse(Horse(
+      _controller.addHorse(Horse(
         name: _nameController.text,
         age: _ageController.text,
         picture: _pictureController.text,
