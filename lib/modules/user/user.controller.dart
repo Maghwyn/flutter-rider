@@ -31,7 +31,7 @@ class UserController extends GetxController {
   void _getUser() {
     _userStateStream.value = UserState.fill(_user);
   }
-
+  
   @override
   void dispose() {
     Get.delete<UserController>();
@@ -55,7 +55,7 @@ class UserController extends GetxController {
     setupLoggedUserLocator(mongoUser);
     _userStateStream.value = UserState.fill(mongoUser);
   }
-
+  
   void updateUser(User user) async {
     final mongoUser = await _userService.updateUsers(user);
     unregisterLoggedUserLocator();
