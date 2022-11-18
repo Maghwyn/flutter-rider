@@ -66,6 +66,7 @@ class PartiesController  extends GetxController {
   void addParty(Party party) async {
     final mongoParty = await _partiesService.addParty(party);
     _partiesStateStream.value.addParty(mongoParty);
+    _sortParty();
     Get.back();
   }
 
@@ -94,6 +95,10 @@ class PartiesController  extends GetxController {
     _partyParticipantsStateStream.value.addPartyParticipant(mongoPartyParticipant);
   }
 
+  void _sortParty() {
+    _partiesStateStream.value.parties.sort((a,b) => -b.date.compareTo(a.date));
+  }
+
   // @override
   // void dispose() {
   //   Get.delete<PartiesController>();
@@ -112,6 +117,7 @@ class PartiesController  extends GetxController {
 
   Future<bool> set() async {
     final partiesList = await _partiesService.getParties();
+    _sortParty();
 
     if (partiesList.isEmpty) {
       _partiesStateStream.value = PartiesState();
@@ -123,6 +129,7 @@ class PartiesController  extends GetxController {
 
   void _getParties() async {
     final partiesList = await _partiesService.getParties();
+    _sortParty();
 
     if (partiesList.isEmpty) {
       _partiesStateStream.value = PartiesState();

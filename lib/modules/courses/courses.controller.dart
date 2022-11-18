@@ -85,7 +85,6 @@ class CoursesController  extends GetxController {
 
   void removeCourse(Course course) async {
     final res = await _coursesService.deleteCourse(course);
-
     _coursStateStream.value.deleteCourse(course);
   }
 
