@@ -6,10 +6,12 @@ import 'package:flutter_project/modules/horses/horses.service.dart';
 import 'package:flutter_project/modules/horses/horses.state.dart';
 import 'package:flutter_project/modules/horses/widget/horses_card.dart';
 import 'package:get/get.dart';
+import 'package:mongo_dart/mongo_dart.dart';
 
 class HorsesController  extends GetxController {
   final HorsesServiceTemplate _horsesService;
   final _horseStateStream = HorsesState().obs;
+  final _singleHorseStateStream = SingleHorseState().obs;
   // final _coursStateFormStream = CourseFormState().obs;
   // final _coursVisualStateStream = CourseVisualState().obs;
   final User _user = inject<User>();
@@ -17,6 +19,7 @@ class HorsesController  extends GetxController {
   List<Widget> get horses => _horseStateStream.value.horses
   .map((horse) =>
     HorseCard(
+      horse: horse,
       name: horse.name,
       age: horse.age,
       robe: horse.robe,
@@ -26,6 +29,8 @@ class HorsesController  extends GetxController {
       isMine: horse.userId == _user.id,
     )
   ).toList();
+
+  Horse get horse => _singleHorseStateStream.value.horse;
 
   // CourseFormState get stateForm => _coursStateFormStream.value;
 
@@ -61,6 +66,10 @@ class HorsesController  extends GetxController {
     return true;
   }
 
+  void getSingleHorse(Horse horse) async {
+     _singleHorseStateStream.value = SingleHorseState.fill(horse);
+  }
+
   void addHorse(Horse horse) async {
     final mongoHorse = await _horsesService.addHorse(horse);
     _horseStateStream.value.addCourse(mongoHorse);
@@ -68,13 +77,33 @@ class HorsesController  extends GetxController {
     Get.back();
   }
 
-  void removeHorse(Horse horse) async {
-    final res = await _horsesService.deleteHorse(horse);
-    _horseStateStream.value.deleteCourse(horse);
+  void setMyHorse(bool x, ObjectId horseId) async {
+    Horse horseUpdate = await _horsesService.setMyHorse(x, horseId);
+     _singleHorseStateStream.value = SingleHorseState.fill(horseUpdate);
+    RxList<Horse> horseList = await _horsesService.getHorses();
+     _horseStateStream.value = HorsesState.fill(horseList);
   }
 
-  void editHorse(Horse horse) async {
-    final res = await _horsesService.editHorse(horse);
+  void editHorse(Horse horse, ObjectId horseId) async {
+    RxList<Horse> horseList = await _horsesService.editHorse(horse, horseId);
+    _horseStateStream.value = HorsesState.fill(horseList);
+    Get.back();
+  }
+
+  void deleteHorse(ObjectId horseId) async {
+    await _horsesService.deleteHorse(horseId);
+    _horseStateStream.value.deleteHorse(horseId);
+    Get.back();
+  }
+
+  void forceRefreshHorse() async {
+    final horsesList = await _horsesService.getHorses();
+
+    if (horsesList.isEmpty) {
+      _horseStateStream.value = HorsesState();
+    } else {
+      _horseStateStream.value = HorsesState.fill(horsesList);
+    }
   }
 
   void _getHorses() async {

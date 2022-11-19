@@ -99,8 +99,8 @@ class AuthenticationService extends AuthenticationServiceTemplate {
       createdAt: user["createdAt"] as DateTime,
       picture: user["picture"] as String,
       role: user["role"] as List<dynamic>,
-      number: user["number"] as String,
-      age: user["age"] as String,
+      number: user["number"] as String?,
+      age: user["age"] as String?,
     );
   }
 }

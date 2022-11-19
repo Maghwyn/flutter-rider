@@ -4,11 +4,12 @@ import 'package:flutter_project/models/horse.dart';
 import 'package:flutter_project/models/text_field.custom.dart';
 import 'package:flutter_project/modules/horses/horses.controller.dart';
 import 'package:flutter_project/modules/horses/horses.service.dart';
+import 'package:flutter_project/modules/user/user.controller.dart';
+import 'package:flutter_project/modules/user/user.service.dart';
 import 'package:get/get.dart';
 
-
-class UserHorsesForm extends StatelessWidget {
-  const UserHorsesForm({super.key});
+class HorsesEditForm extends StatelessWidget {
+  const HorsesEditForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +21,20 @@ class UserHorsesForm extends StatelessWidget {
       ),
       body: const SafeArea(
         minimum: EdgeInsets.all(16),
-        child: _UserHorsesForm(),
+        child: _HorsesEditForm(),
       )
     );
   }
 }
 
-class _UserHorsesForm extends StatefulWidget {
-  const _UserHorsesForm({super.key});
+class _HorsesEditForm extends StatefulWidget {
+  const _HorsesEditForm({super.key});
 
   @override
-  State<_UserHorsesForm> createState() => __UserHorsesForm();
+  __HorsesEditForm createState() => __HorsesEditForm();
 }
 
-class __UserHorsesForm extends State<_UserHorsesForm> {
+class __HorsesEditForm extends State<_HorsesEditForm> {
   final _controller = Get.put(HorsesController(Get.put(HorsesService())));
 
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
@@ -47,6 +48,15 @@ class __UserHorsesForm extends State<_UserHorsesForm> {
 
   @override
   Widget build(BuildContext context) {
+    final UserController uc = Get.put(UserController(Get.put(UserService())));
+    Horse horse = _controller.horse;
+    _pictureController.text = horse.picture;
+    _nameController.text = horse.name;
+    _ageController.text = horse.age;
+    _robeController.text = horse.robe;
+    _raceController.text = horse.race;
+    _sexeController.text = horse.sexe;
+
     return Form(
       key: _key,
       autovalidateMode:
@@ -88,10 +98,33 @@ class __UserHorsesForm extends State<_UserHorsesForm> {
                 hintText: "sexe",
                 controller: _sexeController,
                 validatorType: "text")),
-            ElevatedButton(
-              onPressed: _onEditButtonPressed,
-              child: const Text('Edit'),
+            if(_controller.horse.userId == null || _controller.horse.userId == uc.user.id) (
+              Obx(() => SwitchListTile(
+                title: const Text('Owner ?'),
+                value: _controller.horse.userId == uc.user.id ? true : false,
+                onChanged: (bool value) {
+                  _controller.setMyHorse(value, horse.id!);
+                },
+              ))
             ),
+            Wrap(
+              spacing: 30,
+              children: [
+                ElevatedButton(
+                  onPressed: _onEditButtonPressed,
+                  child: const Text('Edit'),
+                ),
+                if(uc.user.role[0] == "ADMIN") (
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                    ),
+                    onPressed: _onDeleteButtonPressed,
+                    child: const Text('Delete'),
+                  )
+                )
+              ],
+            )
           ],
         ),
       ),
@@ -107,12 +140,16 @@ class __UserHorsesForm extends State<_UserHorsesForm> {
         robe: _robeController.text,
         race: _raceController.text,
         sexe: _sexeController.text,
-      ));
+      ), _controller.horse.id!);
     } else {
       setState(() {
         _autoValidate = true;
       });
     }
+  }
+
+  _onDeleteButtonPressed() {
+    _controller.deleteHorse(_controller.horse.id!);
   }
 }
 

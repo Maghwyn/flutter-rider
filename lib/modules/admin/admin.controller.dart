@@ -27,6 +27,7 @@ class AdminController  extends GetxController {
       type: party.type,
       participants: party.partipantsId.length,
       isMine: _user.id == party.userId,
+      status: party.status,
       canOpen: true,
   )).toList();
 

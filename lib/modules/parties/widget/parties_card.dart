@@ -15,6 +15,7 @@ class PartyCard extends StatefulWidget {
     required this.participants,
     required this.type,
     required this.isMine,
+    required this.status,
     required this.canOpen,
   });
 
@@ -24,6 +25,7 @@ class PartyCard extends StatefulWidget {
   final int participants;
   final String type;
   final bool isMine;
+  final String status;
   final bool canOpen;
 
   @override
@@ -99,6 +101,9 @@ class _PartyCard extends State<PartyCard> {
                                   style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                                 ),
                                 Text("- ${DateFormat("yyyy-MM-dd").format(widget.date)}",
+                                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                ),
+                                Text("- Status: ${widget.status}",
                                   style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                                 ),
                               ],

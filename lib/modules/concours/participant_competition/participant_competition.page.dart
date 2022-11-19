@@ -12,10 +12,10 @@ class CompetitionParticipationForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-          minimum: const EdgeInsets.all(16),
-          child: _CompetitionParticipationForm(),
-        )
+      body: SafeArea(
+        minimum: const EdgeInsets.all(16),
+        child: _CompetitionParticipationForm(),
+      )
     );
   }
 }

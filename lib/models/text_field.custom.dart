@@ -37,6 +37,10 @@ class CustomTextField {
       return 'Email is required.';
     }
 
+    if (value.isEmpty) {
+      return 'Email is required.';
+    }
+
     if (emailFormat.hasMatch(value) == false) {
       return 'Email format is invalid';
     }
