@@ -11,6 +11,6 @@ class DotEnvConfiguration {
 }
 
 final env = DotEnvConfiguration(
-  mongoUri: dotenv.get('MONGO_URI', fallback: 'mongodb://flutteruser:4z3ZqFb0jtdXC8dLhZU14J6V8LpjYyfWni1Ujsj0@localhost:27017'), 
-  mongoDbName: dotenv.get('MONGO_DBNAME', fallback: 'flutter-test'),
+  mongoUri: dotenv.get('MONGO_URI', fallback: 'mongodb://horser:4z3ZqFb0jtdXC8dLhZU14J6V8LpjYyfWni1Ujsj0@localhost:27017'), 
+  mongoDbName: dotenv.get('MONGO_DBNAME', fallback: 'horser-dev'),
 );
